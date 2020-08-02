@@ -15,6 +15,11 @@ module.exports = class Comment extends Sequelize.Model {
       reply_to: {
         type: Sequelize.UUID,
         allowNull: true
+      },
+      has_replies: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defalutValue: false
       }
     }, {
       sequelize,

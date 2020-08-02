@@ -1,27 +1,36 @@
-const Sequelize = require('sequelize');
-const env = process.env.NODE_ENV || 'development';
-const config = require('../config/config')[env];
-const User = require('./user');
-const Post = require('./post');
-const Tag = require('./tag');
-const Comment = require('./comment');
+const express = require('express');
+const router = express.Router();
+const { User, Post } = require('../models');
 
-const db = {};
-const sequelize = new Sequelize(
-  config.database, config.username, config.password, config,
-);
+router.get('/', async (req, res, next) => {
+  try {
+    const posts = await Post.findAll({
+      include: {
+        model: User,
+        attributes: ['id', 'username']
+      },
+      order: [['createdAt', 'DESC']]
+    });
+    res.render('main', {
+      posts,
+      user: req.user
+    })
+  } catch(error) {
+    console.error(error);
+    next(error);
+  }
+});
 
-db.sequelize = sequelize;
-db.User = User;
-db.Post = Post;
-db.Hashtag = Hashtag;
+router.get('/login', (req, res, next) => {
+  res.render('login', {
+    loginError: req.flash('loginError')
+  });
+});
 
-User.init(sequelize);
-Post.init(sequelize);
-Hashtag.init(sequelize);
+router.get('/join', (req, res, next) => {
+  res.render('join', {
+    joinError: req.flash('joinError')
+  });
+});
 
-User.associate(db);
-Post.associate(db);
-Hashtag.associate(db);
-
-module.exports = db;
+module.exports = router;

@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  .login-container
+    .login-card
+      .login-title Login
+      form#login-form(action='/auth/login' method='post')
+        .input-group
+          input#email(type='email' name='email' placeholder='Email address' required autofocus)
+        .input-group
+          input#password(type='password' name='password' placeholder='Password' required)
+        button#login-button.btn(type='submit') 로그인
+        //- hr
+        button#google-login.btn(type='submit') Sign in with Google
+        button#kakao-login.btn(type='submit') Sign in with Kakao
+        if loginError
+          .error-message= loginError

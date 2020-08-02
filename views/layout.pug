@@ -1,0 +1,26 @@
+doctype
+html
+  head
+    meta(charset='UTF-8')
+    title TILote
+    meta(name='viewport' content='width=device-width, user-scalable=no')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    link(href='https://fonts.googleapis.com/css2?family=Righteous&display=swap' rel='stylesheet' type='text/css')
+    link(rel='stylesheet' href='/main.css')
+  body
+    header
+      .header-container
+        a#logo(href="/") TILote
+          //- img(src='/logo.png' alt='logo')
+        .header-buttons
+          if user && user.id
+            button#my-profile.btn My TIL
+            button.btn(onclick="location.href='/auth/logout'") 로그아웃
+          else
+            ul.buttons
+              li#login
+                button.btn(onclick="location.href='/login'") 로그인
+              li#join
+                button.btn(onclick="location.href='/join'") 회원가입
+    .container
+      block content
