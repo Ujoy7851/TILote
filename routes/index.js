@@ -33,4 +33,24 @@ router.get('/join', (req, res, next) => {
   });
 });
 
+router.get('/:uid', async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: { id: req.params.uid },
+      include: {
+        model: Post,
+      },
+      order: [['created_at', 'DESC']]
+    });
+    console.log(user);
+    if(user) {
+      res.render('userpage', {
+        user
+      })
+    }
+  } catch(error) {
+
+  }
+})
+
 module.exports = router;

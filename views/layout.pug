@@ -14,7 +14,8 @@ html
           //- img(src='/logo.png' alt='logo')
         .header-buttons
           if user && user.id
-            button#my-profile.btn My TIL
+            button#my-profile.btn(onclick=`location.href='/${user.id}'`) My TIL
+            button.btn(onclick="location.href='/post'") NEW
             button.btn(onclick="location.href='/auth/logout'") 로그아웃
           else
             ul.buttons

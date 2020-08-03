@@ -1,4 +1,49 @@
-extends layout
-
-block content
-  section hello
+doctype
+html
+  head
+    meta(charset='UTF-8')
+    title TILote
+    meta(name='viewport' content='width=device-width, user-scalable=no')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    link(href='https://fonts.googleapis.com/css2?family=Righteous&display=swap' rel='stylesheet' type='text/css')
+    link(rel='stylesheet' href='/main.css')
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css')
+    script(src='https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js')
+  body
+    header
+      .header-container
+        a#logo(href="/") TILote
+        .header-buttons
+          if user && user.id
+            button#my-profile.btn(onclick=`location.href='/${user.id}'`) My TIL
+            button.btn(onclick="location.href='/post'") NEW
+            button.btn(onclick="location.href='/auth/logout'") 로그아웃
+          else
+            ul.buttons
+              li#login
+                button.btn(onclick="location.href='/login'") 로그인
+              li#join
+                button.btn(onclick="location.href='/join'") 회원가입
+    .container
+      section.main-content
+        form.post-form(action='')
+          .private-select
+            input(type='checkbox' name='private')
+            | 나만 보이는 글
+          .editor.half
+            textarea#md-editor
+          .editor.half
+            textarea#md-editor2
+  script.
+    var simplemde = new SimpleMDE({
+      element: document.getElementById("md-editor"),
+      autofocus: true,
+      toolbar: ["bold", "italic", "heading", "|", "quote"],
+      placeholder: "Type here...",
+      });
+    var simplemde2 = new SimpleMDE({
+      element: document.getElementById("md-editor2"),
+      autofocus: true,
+      toolbar: ["bold", "italic", "heading", "|", "quote"],
+      placeholder: "Type here...",
+      });

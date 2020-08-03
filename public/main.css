@@ -8,18 +8,19 @@ html, body {
 
 header {
   /* background-color: red; */
-  height: 2.5rem;
+  height: 3.5rem;
   width: 100%;
-  box-shadow: 0 0.2rem 0.3rem 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.1rem 0.5rem 0 rgba(0, 0, 0, 0.1);
 }
 
 .header-container {
   /* background-color: yellow; */
   align-items: center;
-  height: 2.5rem;
+  height: 3.5rem;
   width: 100%;
   justify-content: space-between;
   display: flex;
+  padding: 0 1rem;
 }
 
 .header-buttons {
@@ -30,35 +31,39 @@ header {
   margin: 0;
   display: flex;
   list-style: none;
-  padding-right: 0.5rem
+  /* padding-right: 0.5rem */
 }
 
 .btn {
-  height: 2rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  font-size: 0.8rem;
+  height: 2.5rem;
+  padding: 0 0.7rem;
+  font-size: 1rem;
   font-weight: bold;
   color: white;
   cursor: pointer;
-  border-radius: 1rem;
+  border-radius: 1.5rem;
   border-style: none;
-  background: black;
+  background: #303337;
   margin-left: 0.1rem;
   margin-right: 0.1rem;
 }
 
 #logo{
-  font-size: 1.5rem;
+  font-size:2.5rem;
   text-decoration: none;
   background-color: transparent;
-  color: black;
+  color: #303337;
   font-family: "Righteous";
-  margin-left: 0.5rem;
+  /* margin-left: 0.5rem; */
 }
 
 .container {
   height: 100%;
+  /* background-color: #F7F7F7; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
 }
 
 .error-message {
@@ -67,12 +72,12 @@ header {
   font-weight: bold;
 }
 
-.login-container {
+/* .login-container {
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
 .login-card {
   width: 20rem; 
@@ -82,7 +87,7 @@ header {
   border-radius: 1rem;
   box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
   text-align: center;
-  padding: 2rem;
+  /* padding: 2rem; */
 }
 @media (max-width: 20rem) {
   .login-card {
@@ -111,6 +116,7 @@ header {
 .login-card .btn {
   margin-bottom: 0.5rem;
   width: 12rem;
+  height: 2rem;
 }
 
 #google-login {
@@ -120,4 +126,18 @@ header {
 
 #kakao-login {
   background-color: #FEE500;
+}
+
+.main-content {
+  height: 100%;
+  width: 100%;
+  /* padding: 2rem; */
+}
+
+.half {
+  display: inline-block;
+  width: 50%;
+  /* margin: 1rem 0; */
+  padding: 1rem 0.5rem;
+  /* vertical-align: top; */
 }
