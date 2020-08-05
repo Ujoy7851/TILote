@@ -3,16 +3,17 @@ const router = express.Router();
 const { User, Post } = require('../models');
 
 router.get('/', async (req, res, next) => {
-  try {
-    const posts = await Post.findAll({
-      include: {
-        model: User,
-        attributes: ['id', 'username']
-      },
-      order: [['createdAt', 'DESC']]
-    });
+  try {    
+    // const posts = await Post.findAll({
+    //   include: {
+    //     model: User,
+    //     attributes: ['id', 'username']
+    //   },
+    //   order: [['createdAt', 'DESC']]
+    // });
+    // console.log('posts:', posts);
     res.render('main', {
-      posts,
+      // posts,
       user: req.user
     })
   } catch(error) {
@@ -33,24 +34,24 @@ router.get('/join', (req, res, next) => {
   });
 });
 
-router.get('/:uid', async (req, res, next) => {
-  try {
-    const user = await User.findOne({
-      where: { id: req.params.uid },
-      include: {
-        model: Post,
-      },
-      order: [['created_at', 'DESC']]
-    });
-    console.log(user);
-    if(user) {
-      res.render('userpage', {
-        user
-      })
-    }
-  } catch(error) {
+// router.get('/:uid', async (req, res, next) => {
+//   try {
+//     const user = await User.findOne({
+//       where: { id: req.params.uid },
+//       include: {
+//         model: Post,
+//       },
+//       order: [['created_at', 'DESC']]
+//     });
+//     console.log(user);
+//     if(user) {
+//       res.render('userpage', {
+//         user
+//       })
+//     }
+//   } catch(error) {
 
-  }
-})
+//   }
+// })
 
 module.exports = router;

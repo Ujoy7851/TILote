@@ -23,16 +23,16 @@ header {
   padding: 0 1rem;
 }
 
-.header-buttons {
+.header-buttons, .buttons {
   display: inline-block;
 }
 
-.buttons {
+/* .buttons {
   margin: 0;
   display: flex;
   list-style: none;
-  /* padding-right: 0.5rem */
-}
+  padding-right: 0.5rem
+} */
 
 .btn {
   height: 2.5rem;
@@ -46,6 +46,10 @@ header {
   background: #303337;
   margin-left: 0.1rem;
   margin-right: 0.1rem;
+}
+
+.btn:disabled {
+  background-color: grey;
 }
 
 #logo{
@@ -140,4 +144,29 @@ header {
   /* margin: 1rem 0; */
   padding: 1rem 0.5rem;
   /* vertical-align: top; */
+}
+
+.CodeMirror {
+  height: 25rem;
+}
+
+.private {
+  margin-bottom: 1rem;
+}
+
+#edit-title {
+  width: 100%;
+  height: 3rem;
+  font-size: 2.5rem;
+  resize: none;
+  font-weight: bold;
+  border-style: none;
+}
+#edit-tag {
+  width: 100%;
+  height: 2rem;
+  font-size: 1.5rem;
+  resize: none;
+  font-weight: bold;
+  border-style: none;
 }

@@ -8,7 +8,7 @@ module.exports = class Tag extends Sequelize.Model {
         allowNull: false,
         unique: true,
         set(val) {
-          this.setDateValue('name', val.toLowerCase());
+          this.setDataValue('name', val.toLowerCase());
         }
       }
     }, {
