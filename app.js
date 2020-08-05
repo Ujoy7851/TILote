@@ -5,10 +5,10 @@ const path = require('path');
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
+const redis = require('redis');
+const RedisStore = require('connect-redis')(session);
 // const helmet = require('helmet');
 // const hpp = require('hpp');
-// const redis = require('redis');
-// const RedisStore = require('connect-redis')(session);
 require('dotenv').config();
 
 const indexRouter = require('./routes');
@@ -40,19 +40,28 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
-const sessionOption = session({
+const client = redis.createClient({
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
+  logErrors: true
+});
+
+const sessionOption = {
   resave: false,
   saveUninitialized: false,
   secret: process.env.COOKIE_SECRET,
   cookie: {
       httpOnly: true,
       secure: false
-  }
-});
+  },
+  store: new RedisStore({ client })
+};
+
 if(process.env.NODE_ENV === 'production') {
   sessionOption.proxy = true;
   // sessionOption.cookie.secure = true;  //https
 }
+
 app.use(session(sessionOption));
 app.use(flash());
 app.use(passport.initialize());
