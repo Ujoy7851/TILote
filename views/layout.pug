@@ -5,7 +5,9 @@ html
     title TILote
     meta(name='viewport' content='width=device-width, user-scalable=no')
     meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500&display=swap" rel="stylesheet">
     link(href='https://fonts.googleapis.com/css2?family=Righteous&display=swap' rel='stylesheet' type='text/css')
+    link(href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet')
     link(rel='stylesheet' href='/main.css')
   body
     header
@@ -15,7 +17,7 @@ html
         .header-buttons
           if user && user.id
             button#my-profile.btn(onclick=`location.href='/${user.id}'`) My TIL
-            button.btn(onclick="location.href='/post'") NEW
+            button.btn(onclick="location.href='/post'") 새 글
             button.btn(onclick="location.href='/auth/logout'") 로그아웃
           else
             //- ul.buttons

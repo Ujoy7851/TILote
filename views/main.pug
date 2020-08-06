@@ -1,4 +1,31 @@
 extends layout
 
 block content
-  .main Hello! This is main page!
+  .main-container
+    nav
+      button.nav-btn.selected#new-order 최신순
+      button.nav-btn#like-order 좋아요순
+    .posts
+      for post in posts
+        .post-card
+          button.post
+            .post-left
+              .post-top
+                .post-title= post.title
+                .post-content 한줄 요약 한줄 요약 한줄 요약 한줄 요약 한줄 요약 한줄 요약 한줄 요약 한줄 요약 한줄 요약
+              .post-bottom
+                .post-info
+                  .post-author-image
+                    if(post.User.thumbnail)
+                      image(src=post.User.thumbnail alt='thumbnail')
+                    else
+                      i.material-icons#person-icon person
+                  .post-detail-info
+                    .post-author-name= post.User.username
+                    .post-updated 00-00-00
+                .post-like
+                  i.material-icons#favorite-icon favorite
+                  .like-number=post.likes
+            //- if(post.thumbnail)
+            .post-right
+              image(alt='thumbnail')

@@ -4,16 +4,16 @@ const { User, Post } = require('../models');
 
 router.get('/', async (req, res, next) => {
   try {    
-    // const posts = await Post.findAll({
-    //   include: {
-    //     model: User,
-    //     attributes: ['id', 'username']
-    //   },
-    //   order: [['createdAt', 'DESC']]
-    // });
+    const posts = await Post.findAll({
+      include: {
+        model: User,
+        attributes: ['id', 'username']
+      },
+      order: [['updated_at', 'DESC']]
+    });
     // console.log('posts:', posts);
     res.render('main', {
-      // posts,
+      posts,
       user: req.user
     })
   } catch(error) {
