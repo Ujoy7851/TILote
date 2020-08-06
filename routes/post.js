@@ -1,7 +1,30 @@
 const express = require('express');
+const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
 const { isLoggedIn } = require('./middlewares');
 const { Post, User, Tag, sequelize } = require('../models');
 const router = express.Router();
+
+fs.readdir('uploads', (error) => {
+  if (error) {
+    console.error('uploads 폴더가 없어 uploads 폴더를 생성합니다.');
+    fs.mkdirSync('uploads');
+  }
+});
+
+const upload = multer({
+  storage: multer.diskStorage({
+      destination(req, file, cb) {
+          cb(null, 'uploads/');
+      },
+      filename(req, file, cb) {
+          const ext = path.extname(file.originalname);
+          cb(null, path.basename(file.originalname, ext) + new Date().valueOf() + ext);
+      }
+  }),
+  limit: { fileSize: 5 * 1024 * 1024},
+});
 
 router.get('/', isLoggedIn, (req, res, next) => {
   // console.log('/post');
@@ -91,6 +114,11 @@ router.post('/temp', isLoggedIn, async (req, res, next) => {
     console.error(error);
     next(error);
   }
+});
+
+router.post('/img', isLoggedIn, upload.single('img'), (req, res) => {
+  console.log(req.file);
+  res.json({ url: `/img/${req.file.filename}` });
 });
 
 module.exports = router;

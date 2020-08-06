@@ -40,6 +40,20 @@ html
         .private
           input#is-private(type='checkbox' name='private')
           | 나만 보이는 글
+        //- form#thumbnail-form(action='/post/img' method='post' enctype='multipart/form-data')
+        hr
+        .thumbnail-preview
+          div 미리보기 이미지
+          img#img-preview(src='' alt='미리보기' onerror="this.src='https://www.worldloppet.com/wp-content/uploads/2018/10/no-img-placeholder.png'")
+          input#img-url(type='hidden' name='url')
+          .preview-buttons
+            label#img-label(for='img') 사진 업로드
+            input#img(type='file' accept='image/*')
+            button.cancel#cancel 취소
+        hr
+        .description 미리보기 한 줄 요약
+          .editor-description
+            textarea#edit-description(placeholder='100자 이내')
   script.
     var simplemde = new SimpleMDE({
       element: document.getElementById("md-editor"),
@@ -60,21 +74,6 @@ html
         "togglePreview": null,
       }
     });
-    document.getElementById('edit-title').onkeyup = function() {
-      if(this.value === '') {
-        //- console.log('제목없음');
-        document.querySelectorAll('.btn').forEach(function(btn) {
-          btn.disabled = true;
-          document.querySelector('.title-error').innerHTML = '제목을 입력하세요';
-        });
-      } else {
-        //- console.log('제목있음');
-        document.querySelectorAll('.btn').forEach(function(btn) {
-          btn.disabled = false;
-          document.querySelector('.title-error').innerHTML = '';
-        });
-      }
-    };
     document.getElementById('temp').addEventListener('click', function() {
       var formData = new FormData();
       var title = document.getElementById('edit-title').value;
@@ -117,4 +116,26 @@ html
       xhr.open('POST', '/post');
       xhr.setRequestHeader('Content-Type', 'application/json');
       xhr.send(JSON.stringify(data));
+    });
+    document.getElementById('img').addEventListener('change', function (e) {
+      var formData = new FormData();
+      //- console.log(this, this.files);
+      formData.append('img', this.files[0]);
+      var xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          var url = JSON.parse(xhr.responseText).url;
+          document.getElementById('img-url').value = url;
+          document.getElementById('img-preview').src = url;
+          document.getElementById('img-preview').style.display = 'inline';
+        } else {
+          console.error(xhr.responseText);
+        }
+      };
+      xhr.open('POST', '/post/img');
+      xhr.send(formData);
+    });
+    document.getElementById('cancel').addEventListener('click', function (e) {
+      document.getElementById('img-url').value = '';
+      document.getElementById('img-preview').src = 'https://www.worldloppet.com/wp-content/uploads/2018/10/no-img-placeholder.png';
     });
