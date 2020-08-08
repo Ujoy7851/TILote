@@ -30,6 +30,10 @@ module.exports = class Post extends Sequelize.Model {
         allowNull: false,
         defaultValue: 0
       },
+      description: {
+        type: Sequelize.STRING(150),
+        allowNull: true
+      },
       published_at: {
         type: Sequelize.DATE,
         allowNull: true,

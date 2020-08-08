@@ -11,7 +11,6 @@ router.get('/', async (req, res, next) => {
       },
       order: [['updated_at', 'DESC']]
     });
-    // console.log('posts:', posts);
     res.render('main', {
       posts,
       user: req.user

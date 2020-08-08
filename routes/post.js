@@ -43,6 +43,8 @@ router.post('/', isLoggedIn, async (req, res, next) => {
         content: req.body.content,
         is_private: req.body.is_private,
         UserId: req.user.id,
+        thumbnail: req.body.thumbnail,
+        description: req.body.description,
         published_at: sequelize.literal('CURRENT_TIMESTAMP')
       }, {
         where: { title: req.body.title }
@@ -54,6 +56,8 @@ router.post('/', isLoggedIn, async (req, res, next) => {
         content: req.body.content,
         is_private: req.body.is_private,
         UserId: req.user.id,
+        thumbnail: req.body.thumbnail,
+        description: req.body.description,
         published_at: sequelize.literal('CURRENT_TIMESTAMP')
       });
     }

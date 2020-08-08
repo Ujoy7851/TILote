@@ -12,7 +12,8 @@ block content
             .post-left
               .post-top
                 .post-title= post.title
-                .post-content 한줄 요약 한줄 요약 한줄 요약 한줄 요약 한줄 요약 한줄 요약 한줄 요약 한줄 요약 한줄 요약 한줄 요약 한줄 요약 한줄 요약 한줄 요약
+                -const content = post.description.length > 70 ? post.description.substring(0, 70) + '...' : post.description
+                .post-content= content
               .post-bottom
                 .post-info
                   .post-author-image
@@ -22,10 +23,10 @@ block content
                       i.material-icons#person-icon person
                   .post-detail-info
                     .post-author-name= post.User.username
-                    .post-updated 00-00-00
+                    .post-updated= post.updatedAt.toString().substring(4, 24)
                 .post-like
                   i.material-icons#favorite-icon favorite
                   .like-number=post.likes
-            //- if(post.thumbnail)
-            .post-right
-              image(alt='thumbnail')
+            if(post.thumbnail)
+              .post-right
+                image#post-thumbnail(src=`${post.thumbnail}` alt='thumbnail')

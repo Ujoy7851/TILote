@@ -5,7 +5,8 @@ html
     title TILote
     meta(name='viewport' content='width=device-width, user-scalable=no')
     meta(http-equiv='X-UA-Compatible' content='IE=edge')
-    link(href='https://fonts.googleapis.com/css2?family=Righteous&display=swap' rel='stylesheet' type='text/css')
+    link(href="https://fonts.googleapis.com/css2?family=Kanit:wght@500&display=swap" rel="stylesheet")
+    //- link(href='https://fonts.googleapis.com/css2?family=Righteous&display=swap' rel='stylesheet' type='text/css')
     link(rel='stylesheet' href='https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css')
     script(src='https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js')
     link(rel='stylesheet' href='https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css')
@@ -44,7 +45,7 @@ html
         hr
         .thumbnail-preview
           div 미리보기 이미지
-          img#img-preview(src='' alt='미리보기' onerror="this.src='https://www.worldloppet.com/wp-content/uploads/2018/10/no-img-placeholder.png'")
+          img#img-preview(src='' alt='미리보기' onerror="this.src='placeholder.png'")
           input#img-url(type='hidden' name='url')
           .preview-buttons
             label#img-label(for='img') 사진 업로드
@@ -54,6 +55,7 @@ html
         .description 미리보기 한 줄 요약
           .editor-description
             textarea#edit-description(placeholder='100자 이내')
+            .description-count
   script.
     var simplemde = new SimpleMDE({
       element: document.getElementById("md-editor"),
@@ -74,6 +76,30 @@ html
         "togglePreview": null,
       }
     });
+    document.getElementById('edit-title').onkeyup = function() {
+      if(this.value === '') {
+        //- console.log('제목없음');
+        document.querySelectorAll('.btn').forEach(function(btn) {
+          btn.disabled = true;
+          document.querySelector('.title-error').innerHTML = '제목을 입력하세요';
+        });
+      } else {
+        //- console.log('제목있음');
+        document.querySelectorAll('.btn').forEach(function(btn) {
+          btn.disabled = false;
+          document.querySelector('.title-error').innerHTML = '';
+        });
+      }
+    };
+    document.getElementById('edit-description').onkeyup = function() {
+      //- var content = this.value;
+      if(this.value.length > 100) {
+        document.querySelector('.description-count').innerHTML = '최대 100자까지 입력 가능합니다.';
+        this.value = this.value.substring(0, 100);
+      } else {
+        //- document.querySelector('.description-count').innerHTML = '';
+      }
+    };
     document.getElementById('temp').addEventListener('click', function() {
       var formData = new FormData();
       var title = document.getElementById('edit-title').value;
@@ -103,8 +129,10 @@ html
         "title": title,
         "content": simplemde.value(),
         "tag": document.getElementById('edit-tag').value,
-        "is_private": document.getElementById('is-private').checked 
-      }
+        "is_private": document.getElementById('is-private').checked,
+        "description": document.getElementById('edit-description').value,
+        "thumbnail": document.getElementById('img-url').value
+      };
       var xhr = new XMLHttpRequest();
       xhr.onload = function() {
         if(xhr.status === 403) {
@@ -137,5 +165,5 @@ html
     });
     document.getElementById('cancel').addEventListener('click', function (e) {
       document.getElementById('img-url').value = '';
-      document.getElementById('img-preview').src = 'https://www.worldloppet.com/wp-content/uploads/2018/10/no-img-placeholder.png';
+      document.getElementById('img-preview').src = 'placeholder.png';
     });
