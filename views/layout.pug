@@ -17,7 +17,7 @@ html
           //- img(src='/logo.png' alt='logo')
         .header-buttons
           if user && user.id
-            button#my-profile.btn(onclick=`location.href='/${user.id}'`) My TIL
+            button#my-profile.btn(onclick=`location.href='/user/${user.username}'`) My TIL
             button.btn(onclick="location.href='/post'") 새 글
             button.btn(onclick="location.href='/auth/logout'") 로그아웃
           else

@@ -74,21 +74,6 @@ code {
   background-color: #f7f7f7;
 }
 
-/* pre {
-  background-color: #f7f7f7;
-  padding: 1rem 1.5rem;
-  overflow-x: auto;
-  font-size: 0.9rem;
-} */
-
-pre > code, code > span {
-  /* background-color: #bbbbbb; */
-  /* margin: 0.5rem; */
-  /* font-family: 'IBM Plex Mono', Consolas, Courier, 'New Courier', monospace; */
-  /* background-color: transparent; */
-  /* padding: 1rem; */
-  
-}
 
 span {
   display: inline-block;
