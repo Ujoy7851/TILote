@@ -28,6 +28,8 @@ router.get('/:username', async (req, res, next) => {
         c.map(tag => a[tag] = a[tag] ? a[tag] + 1 : 1);
         return a;
       }, {});
+      // let tags = { test: 3, node: 1, '태그': 1, redis: 1, express: 1, nodejs: 71, sequelize: 1, user: 5, abcdef: 1, text: 3, verylongtagname: 81, moretag:77 };
+      console.log(tags);
       res.render('user', {
         user: req.user,
         posts,

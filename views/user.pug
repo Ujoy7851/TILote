@@ -11,10 +11,13 @@ block content
       button.nav-btn.selected#new-order 최신순
       button.nav-btn#like-order(onclick='location.href="/like"') 좋아요순
     .user-tags
+      .tag
+        span.tag-name= 'All ' + `${posts.length}`
+        //- span.tag-num= posts.length
       for tag in Object.keys(tags)
         .tag
-          span.tag-name= tag
-          span.tag-num= tags[tag]
+          span.tag-name= tag + ' ' + tags[tag]
+          //- span.tag-num= tags[tag]
     .posts
       for post in posts
         .post-card

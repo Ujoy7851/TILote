@@ -8,34 +8,35 @@ block content
     nav
       button.nav-btn.selected#new-order 최신순
       button.nav-btn#like-order(onclick='location.href="/like"') 좋아요순
-    .posts
-      for post in posts
-        .post-card
-          button.post(onclick=`location.href='/post/${post.User.username}/${post.id}'`)
-            input#post-author-id(type='hidden' value=post.User.username)
-            input#post-id(type='hidden' value=post.id)
-            .post-left
-              .post-top
-                .post-title= post.title.length > 25 ? post.title.substring(0, 25) + '...' : post.title
-                if(post.description)
-                  -const content = post.description.length > 70 ? post.description.substring(0, 70) + '...' : post.description
-                  .post-content= content
-              .post-bottom
-                .post-info
-                  .post-author-image
-                    if(post.User.thumbnail)
-                      image(src=post.User.thumbnail alt='thumbnail')
-                    else
-                      i.material-icons#person-icon person
-                  .post-detail-info
-                    .post-author-name= post.User.username
-                    .post-updated= post.updatedAt.toString().substring(4, 24)
-                .post-like
-                  i.material-icons#favorite-icon favorite
-                  .like-number=post.likes
-            if(post.thumbnail)
-              .post-right
-                image#post-thumbnail(src=`${post.thumbnail}` alt='thumbnail')
+    .post-container
+      .posts
+        for post in posts
+          .post-card
+            button.post(onclick=`location.href='/post/${post.User.username}/${post.id}'`)
+              input#post-author-id(type='hidden' value=post.User.username)
+              input#post-id(type='hidden' value=post.id)
+              .post-left
+                .post-top
+                  .post-title= post.title.length > 30 ? post.title.substring(0, 30) + '...' : post.title
+                  if(post.description)
+                    -const content = post.description.length > 70 ? post.description.substring(0, 70) + '...' : post.description
+                    .post-content= content
+                .post-bottom
+                  .post-info
+                    .post-author-image
+                      if(post.User.thumbnail)
+                        image(src=post.User.thumbnail alt='thumbnail')
+                      else
+                        i.material-icons#person-icon person
+                    .post-detail-info
+                      .post-author-name= post.User.username
+                      .post-updated= post.updatedAt.toString().substring(4, 24)
+                  .post-like
+                    i.material-icons#favorite-icon favorite
+                    .like-number=post.likes
+              if(post.thumbnail)
+                .post-right
+                  image#post-thumbnail(src=`${post.thumbnail}` alt='thumbnail')
   //- script.
   //-   document.getElementById('new-order').addEventListener('click', function() {
   //-     if(!this.classList.contains('selected')) {

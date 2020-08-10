@@ -27,6 +27,11 @@ nav {
   border-color: #c166fd;
 }
 
+.post-container {
+  display: flex;
+  justify-content: center;
+}
+
 .post-detail {
   /* height: 100%; */
   width: 25%;
@@ -52,10 +57,13 @@ nav {
 }
 
 .posts {
+  max-width: 70rem;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   height: 100%;
   /* justify-content: space-around; */
+  padding: 0;
 }
 
 .post-card {
@@ -143,12 +151,23 @@ nav {
 }
 
 @media screen and (max-width: 36rem) {
+  .main-container {
+    padding: 0;
+  }
+
   .post-card {
-    height: 14rem;
+    /* height: 14rem; */
+    padding: 0;
+    border-bottom: 0.1rem solid #dddddd;
   }
 
   .post {
-    height: 13rem;
+    /* height: 13rem; */
+    box-shadow: none;
+  }
+
+  .post:hover {
+    box-shadow: none;
   }
 
   .post-right {
