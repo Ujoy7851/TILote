@@ -6,8 +6,8 @@ block link
 block content
   .main-container
     nav
-      button.nav-btn.selected#new-order 최신순
-      button.nav-btn#like-order(onclick='location.href="/like"') 좋아요순
+      button.nav-btn#new-order(onclick='location.href="/"') 최신순
+      button.nav-btn.selected#like-order 좋아요순
     .posts
       for post in posts
         .post-card

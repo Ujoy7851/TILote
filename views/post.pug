@@ -1,0 +1,29 @@
+extends layout
+
+block link
+  //- link(rel='stylesheet' href='https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css')
+  link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/a11y-light.min.css")
+  script(src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js")
+  script hljs.initHighlightingOnLoad()
+
+  link(href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet")
+  link(rel='stylesheet' href='/css/post.css')
+
+block content
+  .post-container
+    .post-title= post.title
+    .post-info
+      .post-author-image
+        if(post.User.thumbnail)
+          image(src=post.User.thumbnail alt='thumbnail')
+        else
+          i.material-icons#person-icon person
+      .post-detail-info
+        .post-author-name= post.User.username
+        .post-updated= post.updatedAt.toString().substring(4, 24)
+    .post-tag
+      for tag in tags
+        span.tag= tag.name
+    if(post.thumbnail)
+      img.post-thumbnail(src=post.thumbnail)
+    .post-content !{content}

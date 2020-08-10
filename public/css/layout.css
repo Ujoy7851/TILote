@@ -1,0 +1,89 @@
+@font-face { font-family: 'IBMPlexSansKR-Light'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Light.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+@font-face { font-family: 'MapoFlowerIsland'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoFlowerIslandA.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+* { 
+  box-sizing: border-box;
+  font-family: 'IBMPlexSansKR-Light';
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+header {
+  /* background-color: red; */
+  height: 3.5rem;
+  width: 100%;
+  box-shadow: 0 0.1rem 0.5rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+  /* background-color: yellow; */
+  align-items: center;
+  height: 3.5rem;
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  padding: 0 1rem;
+}
+
+.header-buttons, .buttons {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+
+.btn {
+  height: 2rem;
+  padding: 0 0.7rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #303337;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  /* border-style: none; */
+  border-color: #303337;
+  border-width: thin;
+  background: white;
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
+}
+
+.btn:disabled {
+  background-color: #bbbbbb;
+  border-color: transparent;
+  color: white;
+}
+
+#logo{
+  font-size:2rem;
+  text-decoration: none;
+  background-color: transparent;
+  color: #303337;
+  font-family: "Kanit";
+  /* margin-left: 0.5rem; */
+}
+
+.container {
+  /* height: 100%; */
+  /* background-color: #F7F7F7; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.btn:focus {
+  outline-style: none;
+}

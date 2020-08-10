@@ -2,6 +2,9 @@ const express = require('express');
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
+const marked = require('marked');
+const hljs = require('highlight.js');
+const removeMd = require('remove-markdown');
 const { isLoggedIn } = require('./middlewares');
 const { Post, User, Tag, sequelize } = require('../models');
 const router = express.Router();
@@ -38,13 +41,19 @@ router.post('/', isLoggedIn, async (req, res, next) => {
     let post = await Post.findOne({
       where: { title: req.body.title }
     });
+    let description = null;
+    if(!req.body.description) {
+      description = removeMd(req.body.content).substring(0, 100);
+    } else {
+      description = req.body.description;
+    }
     if(post) {
       await Post.update({
         content: req.body.content,
         is_private: req.body.is_private,
         UserId: req.user.id,
         thumbnail: req.body.thumbnail,
-        description: req.body.description,
+        description,
         published_at: sequelize.literal('CURRENT_TIMESTAMP')
       }, {
         where: { title: req.body.title }
@@ -57,7 +66,7 @@ router.post('/', isLoggedIn, async (req, res, next) => {
         is_private: req.body.is_private,
         UserId: req.user.id,
         thumbnail: req.body.thumbnail,
-        description: req.body.description,
+        description,
         published_at: sequelize.literal('CURRENT_TIMESTAMP')
       });
     }
@@ -73,6 +82,7 @@ router.post('/', isLoggedIn, async (req, res, next) => {
     }
     // console.log('user_id:', req.user.id);
     res.status(201).send();
+    // res.redirect('/')
   } catch(error) {
     console.error(error);
     next(error);
@@ -123,6 +133,38 @@ router.post('/temp', isLoggedIn, async (req, res, next) => {
 router.post('/img', isLoggedIn, upload.single('img'), (req, res) => {
   console.log(req.file);
   res.json({ url: `/img/${req.file.filename}` });
+});
+
+router.get('/:username/:postId', async (req, res, next) => {
+  try {
+    const post = await Post.findOne({
+      where: {
+        id: req.params.postId
+      },
+      include: {
+        model: User,
+        attributes: ['id', 'username']
+      }
+    });
+    let tags = await post.getTags();
+    tags = tags.map(t => t['dataValues']);
+    if(post) {
+      marked.setOptions({
+        headerIds: false,
+        langPrefix: ''
+      });
+      const content = marked(post.content);
+      res.render('post', {
+        post,
+        user: req.user,
+        content,
+        tags
+      });
+    }    
+  } catch(error) {
+    console.error(error);
+    next(error);
+  }
 });
 
 module.exports = router;

@@ -14,12 +14,31 @@ router.get('/', async (req, res, next) => {
     res.render('main', {
       posts,
       user: req.user
-    })
+    });
   } catch(error) {
     console.error(error);
     next(error);
   }
 });
+
+router.get('/like', async (req, res, next) => {
+  try {
+    const posts = await Post.findAll({
+      include: {
+        model: User,
+        attributes: ['id', 'username']
+      },
+      order: [['likes', 'DESC']]
+    });
+    res.render('like', {
+      posts,
+      user: req.user
+    });
+  } catch(error) {
+    console.error(error);
+    next(error);
+  }
+})
 
 router.get('/login', (req, res, next) => {
   res.render('login', {
@@ -32,25 +51,5 @@ router.get('/join', (req, res, next) => {
     joinError: req.flash('joinError')
   });
 });
-
-// router.get('/:uid', async (req, res, next) => {
-//   try {
-//     const user = await User.findOne({
-//       where: { id: req.params.uid },
-//       include: {
-//         model: Post,
-//       },
-//       order: [['created_at', 'DESC']]
-//     });
-//     console.log(user);
-//     if(user) {
-//       res.render('userpage', {
-//         user
-//       })
-//     }
-//   } catch(error) {
-
-//   }
-// })
 
 module.exports = router;

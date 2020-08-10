@@ -1,61 +1,44 @@
-doctype
-html
-  head
-    meta(charset='UTF-8')
-    title TILote
-    meta(name='viewport' content='width=device-width, user-scalable=no')
-    meta(http-equiv='X-UA-Compatible' content='IE=edge')
-    link(href="https://fonts.googleapis.com/css2?family=Kanit:wght@500&display=swap" rel="stylesheet")
-    //- link(href='https://fonts.googleapis.com/css2?family=Righteous&display=swap' rel='stylesheet' type='text/css')
-    link(rel='stylesheet' href='https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css')
-    script(src='https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js')
-    link(rel='stylesheet' href='https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css')
-    script(src='https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js')
-    link(rel='stylesheet' href='/main.css')
-  body
-    header
-      .header-container
-        a#logo(href="/") TILote
-        .header-buttons
-          if user && user.id
-            button#my-profile.btn(onclick=`location.href='/${user.id}'`) My TIL
-            button.btn(onclick="location.href='/post'") 새 글
-            button.btn(onclick="location.href='/auth/logout'") 로그아웃
-          else
-            button.btn(onclick="location.href='/login'") 로그인
-            button.btn(onclick="location.href='/join'") 회원가입
-    .container
-      section.main-editor
-        //- form.post-form(action='/post' method='post')
-        .editor-title
-          textarea#edit-title(placeholder='제목')
-        .editor-tag
-          textarea#edit-tag(placeholder='#태그명1 #태그명2')
-        .editor
-          textarea#md-editor
-        .buttons
-          button.btn#temp(disabled=true) 임시저장
-          button.btn#publish(disabled=true) 등록
-          span.title-error 제목을 입력하세요
-      section.post-detail
-        .private
-          input#is-private(type='checkbox' name='private')
-          | 나만 보이는 글
-        //- form#thumbnail-form(action='/post/img' method='post' enctype='multipart/form-data')
-        hr
-        .thumbnail-preview
-          div 미리보기 이미지
-          img#img-preview(src='' alt='미리보기' onerror="this.src='placeholder.png'")
-          input#img-url(type='hidden' name='url')
-          .preview-buttons
-            label#img-label(for='img') 사진 업로드
-            input#img(type='file' accept='image/*')
-            button.cancel#cancel 취소
-        hr
-        .description 미리보기 한 줄 요약
-          .editor-description
-            textarea#edit-description(placeholder='100자 이내')
-            .description-count
+extends layout
+
+block link
+  link(rel='stylesheet' href='https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css')
+  script(src='https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js')
+  link(rel='stylesheet' href='https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css')
+  script(src='https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js')
+  link(rel='stylesheet' href='/css/newPost.css')
+
+block content
+  section.main-editor
+    //- form.post-form(action='/post' method='post')
+    .editor-title
+      textarea#edit-title(placeholder='제목')
+    .editor-tag
+      textarea#edit-tag(placeholder='#태그명1 #태그명2')
+    .editor
+      textarea#md-editor
+    .buttons
+      button.btn#temp(disabled=true) 임시저장
+      button.btn#publish(disabled=true) 등록
+      span.title-error 제목을 입력하세요
+  section.post-detail
+    .private
+      input#is-private(type='checkbox' name='private')
+      | 나만 보이는 글
+    //- form#thumbnail-form(action='/post/img' method='post' enctype='multipart/form-data')
+    hr
+    .thumbnail-preview
+      div 미리보기 이미지
+      img#img-preview(src='' alt='미리보기' onerror="this.src='placeholder.png'")
+      input#img-url(type='hidden' name='url')
+      .preview-buttons
+        label#img-label(for='img') 사진 업로드
+        input#img(type='file' accept='image/*')
+        button.cancel#cancel 취소
+    hr
+    .description 미리보기 한 줄 요약
+      .editor-description
+        textarea#edit-description(placeholder='100자 이내')
+        .description-count
   script.
     var simplemde = new SimpleMDE({
       element: document.getElementById("md-editor"),
@@ -103,7 +86,7 @@ html
     document.getElementById('temp').addEventListener('click', function() {
       var formData = new FormData();
       var title = document.getElementById('edit-title').value;
-      const data = {
+      var data = {
         "title": title,
         "content": simplemde.value(),
         "tag": document.getElementById('edit-tag').value,
@@ -125,7 +108,7 @@ html
     document.getElementById('publish').addEventListener('click', function() {
       var formData = new FormData();
       var title = document.getElementById('edit-title').value;
-      const data = {
+      var data = {
         "title": title,
         "content": simplemde.value(),
         "tag": document.getElementById('edit-tag').value,
