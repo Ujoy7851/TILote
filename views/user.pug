@@ -6,7 +6,15 @@ block link
 block content
   .main-container
     .profile
-      div=owner.username
+      .profile-thumbnail
+        if owner.thumbnail
+          image(src=owner.thumbnail alt='thumbnail')
+        else
+          i.material-icons#profile-icon person
+      .profile-info
+        .profile-name=owner.username
+        .profile-about ollitia enim doloremque, repellendus neque excepturi aspernatur quas esse?
+      //- hr
     nav
       button.nav-btn.btn-selected#new-order 최신순
       button.nav-btn#like-order(onclick=`location.href="/user/${owner.username}/likes"`) 좋아요한 글
@@ -38,10 +46,10 @@ block content
                     if post.User.thumbnail
                       image(src=post.User.thumbnail alt='thumbnail')
                     else
-                      i.material-icons#person-icon person
+                      i.material-icons#post-author-icon person
                   .post-detail-info
                     .post-author-name= post.User.username
-                    .post-updated= post.published_at.toString().substring(4, 24)
+                    .post-updated= post.published_at.toString().substring(4, 21)
                 .post-like
                   i.material-icons#favorite-icon favorite
                   .like-number=post.likes

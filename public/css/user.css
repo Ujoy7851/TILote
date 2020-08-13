@@ -5,10 +5,58 @@
   flex-direction: column;
   align-items: center; */
   width: 100%;
+  max-width: 50rem;
+}
+
+.profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* position: absolute;
+  left: 2rem;
+  top: 5rem;
+  width: 10rem; */
+  /* text-align: center; */
+  /* width: 100%; */
+  /* max-width: 45rem; */
+  background-color: #c166fd18;
+  border-radius: 1rem;
+  margin: 0 1rem;
+}
+
+#profile-icon {
+  color: white;
+  background-color: #c166fd34;
+  font-size: 5rem;
+  border-radius: 50%;
+  /* padding: 0.1rem; */
+  margin: 1rem 1rem;
+}
+
+.profile-info {
+  margin: 1rem;
+}
+
+.profile-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #c166fd;
+  margin-bottom: 0.5rem;
+  /* border-left: 0.2rem solid #727272;
+  border-right: 0.2rem solid #727272; */
+  
+  /* width: 100%; */
+  /* max-width: 45rem; */
+}
+
+.profile-about {
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  /* font-weight: bold; */
 }
 
 nav {
-  margin: 0 0 2rem 0;
+  margin: 1rem 0 1rem 0;
   /* padding: 0 2rem; */
   text-align: center;
 }
@@ -35,7 +83,7 @@ nav {
   /* margin-bottom: 3rem; */
   position: absolute;
   left: 2rem;
-  top: 11rem;
+  top: 12rem;
 }
 
 .tags {
@@ -252,9 +300,9 @@ nav {
   align-items: center;
 }
 
-#person-icon {
+#post-author-icon {
   color: white;
-  background-color: #bbbbbb;
+  background-color: #dddddd;
   font-size: 2rem;
   border-radius: 50%;
   padding: 0.1rem;
@@ -264,7 +312,7 @@ nav {
   margin: 0;
   display: flex;
   flex-direction: row;
-  color: #bbbbbb;
+  color: #cccccc;
   font-size: 1rem;
   align-items: flex-end;
   padding-bottom: 0.5rem;
@@ -283,12 +331,13 @@ nav {
   flex-direction: column;
   justify-content: space-between;
   font-size: 0.75rem;
-  color: #bbbbbb;
+  color: #aaaaaa;
   /* font-weight: bold; */
 }
 
 .post-author-name {
   font-weight: bold;
+  font-size: 0.85rem;
   color: #303337;
 }
 

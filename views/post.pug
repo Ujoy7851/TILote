@@ -21,7 +21,7 @@ block content
       .post-detail-info
         .post-author-name
           a(href=`/user/${post.User.username}`)= post.User.username
-        .post-updated= post.published_at.toString().substring(4, 24)
+        .post-updated= post.published_at.toString().substring(4, 21)
     .post-tag
       for tag in tags
         span.tag= tag.name

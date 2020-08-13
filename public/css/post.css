@@ -29,7 +29,7 @@
 
 #person-icon {
   color: white;
-  background-color: #bbbbbb;
+  background-color: #cccccc;
   font-size: 2rem;
   border-radius: 50%;
   padding: 0.1rem;
@@ -42,12 +42,13 @@
   flex-direction: column;
   justify-content: space-between;
   font-size: 0.75rem;
-  color: #bbbbbb;
+  color: #aaaaaa;
   /* font-weight: bold; */
 }
 
 .post-author-name {
   font-weight: bold;
+  font-size: 0.85rem;
   color: #303337;
 }
 
@@ -87,6 +88,7 @@ span {
 a {
   text-decoration: none;
   color: #c166fd;
+  word-break: break-all;
 }
 
 blockquote {

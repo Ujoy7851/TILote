@@ -21,7 +21,7 @@ block content
               .post-top
                 .post-title= post.title.length > 25 ? post.title.substring(0, 25) + '...' : post.title
               .post-detail-info
-                .post-updated= post.updatedAt.toString().substring(4, 24)
+                .post-updated= post.updatedAt.toString().substring(4, 21)
           button.delete.btn(data-post-id=post.id) 삭제
   script.
     document.querySelectorAll('.delete').forEach(function (tag) {
