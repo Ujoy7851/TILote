@@ -6,26 +6,26 @@ block link
 block content
   .main-container
     .profile
-      div=user.username
+      div=owner.username
     nav
       button.nav-btn.btn-selected#new-order 최신순
-      button.nav-btn#like-order(onclick=`location.href="/user/${user.username}/likes"`) 좋아요한 글
+      button.nav-btn#like-order(onclick=`location.href="/user/${owner.username}/likes"`) 좋아요한 글
+      if user.id === owner.id
+        button.nav-btn#like-order(onclick=`location.href="/user/${owner.username}/temps"`) 임시글
     if tags
       .user-tags
         .tags Tags
         button.tag
           span.tag-name.tag-selected= 'All ' + `${posts.length}`
-          //- span.tag-num= posts.length
         for tag in Object.keys(tags)
           button.tag
             span.tag-name= tag + ' ' + tags[tag]
-            //- span.tag-num= tags[tag]
     .posts
       for post in posts
         .post-card
           button.post(onclick=`location.href='/post/${post.id}'`)
-            input#post-author-id(type='hidden' value=post.User.username)
-            input#post-id(type='hidden' value=post.id)
+            //- input#post-author-id(type='hidden' value=post.User.username)
+            //- input#post-id(type='hidden' value=post.id)
             .post-left
               .post-top
                 .post-title= post.title.length > 25 ? post.title.substring(0, 25) + '...' : post.title

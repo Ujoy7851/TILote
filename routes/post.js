@@ -29,11 +29,24 @@ const upload = multer({
   limit: { fileSize: 5 * 1024 * 1024},
 });
 
-router.get('/', isLoggedIn, (req, res, next) => {
-  // console.log('/post');
-  res.render('newPost', {
-    user: req.user
-  });
+router.get('/', isLoggedIn, async (req, res, next) => {;
+  if(req.query.id) {
+    const post = content = await Post.findOne({
+      where: { id: req.query.id }
+    });
+    let tags = await post.getTags();
+    tags = tags.map(t => '#' + t.name);
+    console.log('===============', tags);
+    res.render('newPost', {
+      user: req.user,
+      post,
+      tags
+    });
+  } else {
+    res.render('newPost', {
+      user: req.user
+    });
+  }
 });
 
 router.post('/', isLoggedIn, async (req, res, next) => {
@@ -91,17 +104,21 @@ router.post('/', isLoggedIn, async (req, res, next) => {
 
 router.post('/temp', isLoggedIn, async (req, res, next) => {
   try {
-    let post = await Post.findOne({
-      where: { title: req.body.title }
-    });
+    let post;
+    if(req.body.id) {
+      post = await Post.findOne({
+        where: { id: req.body.id }
+      });
+    }    
     if(post) {
       await Post.update({
+        title: req.body.title,
         content: req.body.content,
         is_private: req.body.is_private,
         UserId: req.user.id,
         published_at: null
       }, {
-        where: { title: req.body.title }
+        where: { id: req.body.id }
       });
       // console.log('update post:', post)
     } else {
@@ -123,7 +140,7 @@ router.post('/temp', isLoggedIn, async (req, res, next) => {
       // await post.addTags(result.map(r => r[0]));
     }
     console.log(req.body);
-    res.sendStatus(200);
+    res.json(post.id);
   } catch(error) {
     console.error(error);
     next(error);
@@ -171,7 +188,7 @@ router.get('/:postId', async (req, res, next) => {
   }
 });
 
-router.post('/:postId/like', async (req, res, next) => {
+router.post('/:postId/like', isLoggedIn, async (req, res, next) => {
   try {
     console.log('================liked!');
     const post = await Post.findOne({
@@ -191,7 +208,7 @@ router.post('/:postId/like', async (req, res, next) => {
   }
 });
 
-router.post('/:postId/unlike', async (req, res, next) => {
+router.post('/:postId/unlike', isLoggedIn, async (req, res, next) => {
   try {
     console.log('==============unliked!');
     const post = await Post.findOne({
@@ -210,5 +227,19 @@ router.post('/:postId/unlike', async (req, res, next) => {
     next(error);
   }
 });
+
+router.delete('/:postId', async (req, res, next) => {
+  try {
+    await Post.destroy({
+      where: {
+        id: req.params.postId, user_id: req.user.id
+      }
+    });
+    res.send('OK');
+  } catch(error) {
+    console.error(error);
+    next(error);
+  }
+})
 
 module.exports = router;
