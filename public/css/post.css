@@ -69,6 +69,10 @@ code {
   font-size: 0.9rem;
 }
 
+code span {
+  font-family: Consolas, Courier, 'New Courier', monospace;
+}
+
 .hljs {
   padding: 1rem 1.5rem;
   background-color: #f7f7f7;
@@ -111,4 +115,35 @@ blockquote > p {
   margin-right: 0.5rem;
   font-weight: bold;
   font-size: 0.9rem;
+}
+
+.post-like {
+  position: fixed;
+  right: 5rem;
+  bottom: 2rem;
+  
+  /* border: 0.1rem solid #c166fd; */
+}
+
+.post-like > button {
+  border-style: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  color: #c166fd;
+}
+
+.post-like > button:focus {
+  outline-style: none;
+}
+
+i {
+  vertical-align: middle;
+}
+
+.top-btn {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  font-weight: bold;
 }

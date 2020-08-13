@@ -1,42 +1,53 @@
 extends layout
 
 block link
-  link(rel="stylesheet", href="/css/main.css")
+  link(rel="stylesheet", href="/css/user.css")
 
 block content
   .main-container
+    .profile
+      div=user.username
     nav
-      button.nav-btn.selected#new-order 최신순
-      button.nav-btn#like-order(onclick='location.href="/likes"') 좋아요순
-    .post-container
-      .posts
-        for post in posts
-          .post-card
-            button.post(onclick=`location.href='/post/${post.id}'`)
-              input#post-author-id(type='hidden' value=post.User.username)
-              input#post-id(type='hidden' value=post.id)
-              .post-left
-                .post-top
-                  .post-title= post.title.length > 30 ? post.title.substring(0, 30) + '...' : post.title
-                  if(post.description)
-                    -const content = post.description.length > 70 ? post.description.substring(0, 70) + '...' : post.description
-                    .post-content= content
-                .post-bottom
-                  .post-info
-                    .post-author-image
-                      if(post.User.thumbnail)
-                        image(src=post.User.thumbnail alt='thumbnail')
-                      else
-                        i.material-icons#person-icon person
-                    .post-detail-info
-                      .post-author-name= post.User.username
-                      .post-updated= post.published_at.toString().substring(4, 24)
-                  .post-like
-                    i.material-icons#favorite-icon favorite
-                    .like-number=post.likes
-              if(post.thumbnail)
-                .post-right
-                  image#post-thumbnail(src=`${post.thumbnail}` alt='thumbnail')
+      button.nav-btn#new-order(onclick=`location.href="/user/${user.username}"`) 최신순
+      button.nav-btn.btn-selected#like-order 좋아요한 글
+    if tags
+      .user-tags
+        .tags Tags
+        button.tag
+          span.tag-name.tag-selected= 'All ' + `${posts.length}`
+          //- span.tag-num= posts.length
+        for tag in Object.keys(tags)
+          button.tag
+            span.tag-name= tag + ' ' + tags[tag]
+            //- span.tag-num= tags[tag]
+    .posts
+      for post in posts
+        .post-card
+          button.post(onclick=`location.href='/post/${post.id}'`)
+            input#post-author-id(type='hidden' value=post.User.username)
+            input#post-id(type='hidden' value=post.id)
+            .post-left
+              .post-top
+                .post-title= post.title.length > 25 ? post.title.substring(0, 25) + '...' : post.title
+                if post.description
+                  -const content = post.description.length > 70 ? post.description.substring(0, 70) + '...' : post.description
+                  .post-content= content
+              .post-bottom
+                .post-info
+                  .post-author-image
+                    if post.User.thumbnail
+                      image(src=post.User.thumbnail alt='thumbnail')
+                    else
+                      i.material-icons#person-icon person
+                  .post-detail-info
+                    .post-author-name= post.User.username
+                    .post-updated= post.published_at.toString().substring(4, 24)
+                .post-like
+                  i.material-icons#favorite-icon favorite
+                  .like-number=post.likes
+            if post.thumbnail
+              .post-right
+                image#post-thumbnail(src=`${post.thumbnail}` alt='thumbnail')
   //- script.
   //-   document.getElementById('new-order').addEventListener('click', function() {
   //-     if(!this.classList.contains('selected')) {

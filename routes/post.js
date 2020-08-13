@@ -135,16 +135,20 @@ router.post('/img', isLoggedIn, upload.single('img'), (req, res) => {
   res.json({ url: `/img/${req.file.filename}` });
 });
 
-router.get('/:username/:postId', async (req, res, next) => {
+router.get('/:postId', async (req, res, next) => {
   try {
     const post = await Post.findOne({
       where: {
         id: req.params.postId
       },
-      include: {
+      include: [{
         model: User,
         attributes: ['id', 'username']
-      }
+      }, {
+        model: User,
+        attributes: ['id', 'username'],
+        as: 'Liker'
+      }]
     });
     let tags = await post.getTags();
     tags = tags.map(t => t['dataValues']);
@@ -161,6 +165,46 @@ router.get('/:username/:postId', async (req, res, next) => {
         tags
       });
     }    
+  } catch(error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.post('/:postId/like', async (req, res, next) => {
+  try {
+    console.log('================liked!');
+    const post = await Post.findOne({
+      where: { id: req.params.postId }
+    });
+    const test = await Post.update({
+      likes: post.likes + 1
+    }, {
+      where: { id: req.params.postId }
+    });
+    console.log('===================', test);
+    await post.addLiker(req.user.id);
+    res.status(200).send();
+  } catch(error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.post('/:postId/unlike', async (req, res, next) => {
+  try {
+    console.log('==============unliked!');
+    const post = await Post.findOne({
+      where: { id: req.params.postId }
+    });
+    const test = await Post.update({
+      likes: post.likes - 1
+    }, {
+      where: { id: req.params.postId }
+    });
+    console.log('===================', test);
+    await post.removeLiker(req.user.id);
+    res.status(200).send();
   } catch(error) {
     console.error(error);
     next(error);

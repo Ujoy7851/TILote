@@ -53,6 +53,9 @@ module.exports = class Post extends Sequelize.Model {
   static associate(db) {
     db.Post.belongsTo(db.User);
     db.Post.belongsToMany(db.Tag, { through: 'PostTag' });
-    db.Post.belongsToMany(db.User, { through: 'Like' });
+    db.Post.belongsToMany(db.User, { 
+      through: 'Like',
+      as: 'Liker'
+    });
   }
 };

@@ -10,20 +10,67 @@ block link
   link(rel='stylesheet' href='/css/post.css')
 
 block content
-  .post-container
+  .post-container(data-post-id=post.id)
     .post-title= post.title
     .post-info
       .post-author-image
-        if(post.User.thumbnail)
+        if post.User.thumbnail
           image(src=post.User.thumbnail alt='thumbnail')
         else
           i.material-icons#person-icon person
       .post-detail-info
         .post-author-name= post.User.username
-        .post-updated= post.updatedAt.toString().substring(4, 24)
+        .post-updated= post.published_at.toString().substring(4, 24)
     .post-tag
       for tag in tags
         span.tag= tag.name
-    if(post.thumbnail)
-      img.post-thumbnail(src=post.thumbnail)
+      if post.thumbnail
+        img.post-thumbnail(src=post.thumbnail)
     .post-content !{content}
+    .post-like
+      -const like = user && post.Liker && post.Liker.map(l => l.id).includes(user.id)
+      if user && !like
+        button.like
+          i.material-icons favorite_border
+      else if user && like
+        button.unlike
+          i.material-icons favorite
+    .top-btn
+      a(href='#') TOP
+  script.
+    var likeBtn = document.querySelector('.like');
+    if(likeBtn) {
+      likeBtn.addEventListener('click', function() {
+        var post = document.querySelector('.post-container');
+        var postId = post.dataset.postId;
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          if (xhr.status === 200) {
+            location.reload();
+          } else {
+            console.error(xhr.responseText);
+          }
+        };
+        xhr.open('POST', '/post/' + postId + '/like');
+        xhr.send();
+      });
+    }
+    var unlikeBtn = document.querySelector('.unlike');
+    if(unlikeBtn) {
+      unlikeBtn.addEventListener('click', function() {
+        console.log('unlike!!')
+        var post = document.querySelector('.post-container');
+        var postId = post.dataset.postId;
+        console.log('postid:', postId);
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          if (xhr.status === 200) {
+            location.reload();
+          } else {
+            console.error(xhr.responseText);
+          }
+        };
+        xhr.open('POST', '/post/' + postId + '/unlike');
+        xhr.send();
+      });
+    }

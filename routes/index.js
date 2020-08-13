@@ -1,15 +1,20 @@
 const express = require('express');
+const { Op } = require("sequelize");
 const router = express.Router();
 const { User, Post } = require('../models');
 
 router.get('/', async (req, res, next) => {
   try {    
     const posts = await Post.findAll({
+      where: {
+        is_private: false,
+        published_at: { [Op.ne]: null }
+      },
       include: {
         model: User,
         attributes: ['id', 'username']
       },
-      order: [['updated_at', 'DESC']]
+      order: [['published_at', 'DESC']]
     });
     res.render('main', {
       posts,
@@ -21,14 +26,18 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/like', async (req, res, next) => {
+router.get('/likes', async (req, res, next) => {
   try {
     const posts = await Post.findAll({
+      where: {
+        is_private: false,
+        published_at: { [Op.ne]: null }
+      },
       include: {
         model: User,
         attributes: ['id', 'username']
       },
-      order: [['likes', 'DESC']]
+      order: [['likes', 'DESC'], ['published_at', 'DESC']]
     });
     res.render('like', {
       posts,

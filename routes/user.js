@@ -1,21 +1,27 @@
 const express = require('express');
+const { Op } = require("sequelize");
 const { User, Post } = require('../models');
 const router = express.Router();
 
 router.get('/:username', async (req, res, next) => {
   try {
     const user = await User.findOne({
-      where: { username: req.params.username }
+      where: { 
+        username: req.params.username
+      }
     });
     if(user) {
       const posts = await Post.findAll({
         where: {
-          UserId: user.id
+          UserId: user.id,
+          is_private: false,
+          published_at: { [Op.ne]: null }
         },
         include: {
           model: User,
           attributes: ['id', 'username']
         },
+        order: [['published_at', 'DESC']]
       });
       let tags = await Promise.all(posts.map(async post => {
         let tagsTemp = await post.getTags();
@@ -36,7 +42,35 @@ router.get('/:username', async (req, res, next) => {
         tags
       });
     }
-    
+  } catch(error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.get('/:username/likes', async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: { username: req.params.username }
+    });
+    // let posts = [];
+    if(user) {
+      let posts = await user.getLiked({
+        where: {
+          is_private: false,
+          published_at: { [Op.ne]: null }
+        },
+        include: [{
+          model: User,
+          attributes: ['id', 'username']
+        }],
+        order: [['published_at', 'DESC']]
+      });
+      res.render('userLike', {
+        user: req.user,
+        posts
+      });
+    }
   } catch(error) {
     console.error(error);
     next(error);
