@@ -38,6 +38,10 @@ header {
   align-content: center;
 }
 
+button {
+  cursor: pointer;
+}
+
 .btn {
   height: 2rem;
   padding: 0 0.7rem;

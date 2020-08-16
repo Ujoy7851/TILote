@@ -31,15 +31,14 @@ const upload = multer({
 
 router.get('/', isLoggedIn, async (req, res, next) => {;
   if(req.query.id) {
-    const post = content = await Post.findOne({
+    const post = await Post.findOne({
       where: { id: req.query.id }
     });
     let tags = await post.getTags();
     tags = tags.map(t => '#' + t.name);
-    console.log('===============', tags);
     res.render('newPost', {
       user: req.user,
-      post,
+      post: JSON.stringify(post),
       tags
     });
   } else {
@@ -51,9 +50,12 @@ router.get('/', isLoggedIn, async (req, res, next) => {;
 
 router.post('/', isLoggedIn, async (req, res, next) => {
   try {
-    let post = await Post.findOne({
-      where: { title: req.body.title }
-    });
+    let post;
+    if(req.body.id) {
+      post = await Post.findOne({
+        where: { id: req.body.id }
+      });
+    }    
     let description = null;
     if(!req.body.description) {
       description = removeMd(req.body.content).substring(0, 100);
@@ -62,6 +64,7 @@ router.post('/', isLoggedIn, async (req, res, next) => {
     }
     if(post) {
       await Post.update({
+        title: req.body.title,
         content: req.body.content,
         is_private: req.body.is_private,
         UserId: req.user.id,
@@ -69,7 +72,7 @@ router.post('/', isLoggedIn, async (req, res, next) => {
         description,
         published_at: sequelize.literal('CURRENT_TIMESTAMP')
       }, {
-        where: { title: req.body.title }
+        where: { id: req.body.id }
       });
       // console.log('update post:', post)
     } else {
@@ -84,17 +87,16 @@ router.post('/', isLoggedIn, async (req, res, next) => {
       });
     }
     const tags = req.body.tag.match(/#[^\s#]*/g);
-    // console.log('tags:', tags);
     if(tags) {
       const result = await Promise.all(tags.map(tag => {
         return Tag.findOrCreate({
             where: { name: tag.slice(1).toLowerCase() },
         })
       }));
-      await post.addTags(result.map(r => r[0]));
+      await post.setTags(result.map(r => r[0]));
     }
     // console.log('user_id:', req.user.id);
-    res.status(201).send();
+    res.status(201).send({ username: req.user.username });
     // res.redirect('/')
   } catch(error) {
     console.error(error);
@@ -109,13 +111,21 @@ router.post('/temp', isLoggedIn, async (req, res, next) => {
       post = await Post.findOne({
         where: { id: req.body.id }
       });
-    }    
+    }
+    let description = null;
+    if(!req.body.description) {
+      description = removeMd(req.body.content).substring(0, 100);
+    } else {
+      description = req.body.description;
+    }
     if(post) {
       await Post.update({
         title: req.body.title,
         content: req.body.content,
         is_private: req.body.is_private,
         UserId: req.user.id,
+        thumbnail: req.body.thumbnail,
+        description,
         published_at: null
       }, {
         where: { id: req.body.id }
@@ -127,6 +137,9 @@ router.post('/temp', isLoggedIn, async (req, res, next) => {
         content: req.body.content,
         is_private: req.body.is_private,
         UserId: req.user.id,
+        thumbnail: req.body.thumbnail,
+        description,
+        published_at: null
       });
     }
     const tags = req.body.tag.match(/#[^\s#]*/g);
@@ -137,7 +150,7 @@ router.post('/temp', isLoggedIn, async (req, res, next) => {
             where: { name: tag.slice(1).toLowerCase() },
         })
       }));
-      // await post.addTags(result.map(r => r[0]));
+      await post.setTags(result.map(r => r[0]));
     }
     console.log(req.body);
     res.json(post.id);

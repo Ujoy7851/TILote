@@ -1,18 +1,73 @@
 const express = require('express');
 const { Op } = require("sequelize");
-const { User, Post } = require('../models');
+const { User, Post, Tag } = require('../models');
 const { isLoggedIn } = require('./middlewares');
 const router = express.Router();
 
+router.get('/temps', isLoggedIn, async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: { 
+        id: req.user.id
+      }
+    });
+    if(user) {
+      const posts = await Post.findAll({
+        where: {
+          UserId: user.id,
+          published_at: null
+        },
+        order: [['updated_at', 'DESC']]
+      });
+      res.render('userTemp', {
+        owner: user,
+        user: req.user,
+        posts,
+      });
+    }
+  } catch(error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.get('/private', isLoggedIn, async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: { id: req.user.id }
+    });
+    if(user) {
+      let posts = await Post.findAll({
+        where: {
+          UserId: user.id,
+          is_private: true
+        },
+        order: [['updated_at', 'DESC']]
+      });
+      res.render('userPrivate', {
+        owner: user,
+        user: req.user,
+        posts
+      });
+    }
+  } catch(error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 router.get('/:username', async (req, res, next) => {
   try {
+    if(req.query.tag) {
+      
+    }
     const user = await User.findOne({
       where: { 
         username: req.params.username
       }
     });
     if(user) {
-      const posts = await Post.findAll({
+      let posts = await Post.findAll({
         where: {
           UserId: user.id,
           is_private: false,
@@ -36,12 +91,30 @@ router.get('/:username', async (req, res, next) => {
         return a;
       }, {});
       // let tags = { test: 3, node: 1, '태그': 1, redis: 1, express: 1, nodejs: 71, sequelize: 1, user: 5, abcdef: 1, text: 3, verylongtagname: 81, moretag:77 };
-      console.log(tags);
+      // console.log(tags);
+      if(req.query.tag) {
+        const tag = await Tag.findOne({
+          where: { name: req.query.tag }
+        });
+        posts = await tag.getPosts({
+          where: {
+            UserId: user.id,
+            is_private: false,
+            published_at: { [Op.ne]: null }
+          },
+          include: [{
+            model: User,
+            attributes: ['id', 'username']
+          }],
+          order: [['published_at', 'DESC']]
+        });
+      }
       res.render('user', {
         owner: user,
         user: req.user,
         posts,
-        tags
+        tags,
+        tag: req.query.tag
       });
     }
   } catch(error) {
@@ -72,33 +145,6 @@ router.get('/:username/likes', async (req, res, next) => {
         owner: user,
         user: req.user,
         posts
-      });
-    }
-  } catch(error) {
-    console.error(error);
-    next(error);
-  }
-});
-
-router.get('/:username/temps', isLoggedIn, async (req, res, next) => {
-  try {
-    const user = await User.findOne({
-      where: { 
-        username: req.params.username
-      }
-    });
-    if(user) {
-      const posts = await Post.findAll({
-        where: {
-          UserId: user.id,
-          published_at: null
-        },
-        order: [['updated_at', 'DESC']]
-      });
-      res.render('userTemp', {
-        owner: user,
-        user: req.user,
-        posts,
       });
     }
   } catch(error) {

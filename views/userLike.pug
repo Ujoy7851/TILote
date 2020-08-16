@@ -6,12 +6,21 @@ block link
 block content
   .main-container
     .profile
-      div=owner.username
+      .profile-thumbnail
+        if owner.thumbnail
+          image(src=owner.thumbnail alt='thumbnail')
+        else
+          i.material-icons#profile-icon person
+      .profile-info
+        .profile-name=owner.username
+        .profile-about ollitia enim doloremque, repellendus neque excepturi aspernatur quas esse?
     nav
-      button.nav-btn#new-order(onclick=`location.href="/user/${owner.username}"`) 최신순
+      button.nav-btn#new-order(onclick=`location.href="/user/${owner.username}"`) 작성글
       button.nav-btn.btn-selected#like-order 좋아요한 글
-      if user.id === owner.id
-        button.nav-btn#like-order(onclick=`location.href="/user/${owner.username}/temps"`) 임시글
+      if user && user.id === owner.id
+        button.nav-btn#like-order(onclick='location.href="/user/temps"') 임시글
+      if user && user.id === owner.id
+        button.nav-btn#like-order(onclick='location.href="/user/private"') 비밀글
     .posts
       for post in posts
         .post-card

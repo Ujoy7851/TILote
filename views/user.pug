@@ -16,18 +16,26 @@ block content
         .profile-about ollitia enim doloremque, repellendus neque excepturi aspernatur quas esse?
       //- hr
     nav
-      button.nav-btn.btn-selected#new-order 최신순
+      button.nav-btn.btn-selected#new-order 작성글
       button.nav-btn#like-order(onclick=`location.href="/user/${owner.username}/likes"`) 좋아요한 글
-      if user.id === owner.id
-        button.nav-btn#like-order(onclick=`location.href="/user/${owner.username}/temps"`) 임시글
+      if user && user.id === owner.id
+        button.nav-btn#like-order(onclick='location.href="/user/temps"') 임시글
+      if user && user.id === owner.id
+        button.nav-btn#like-order(onclick='location.href="/user/private"') 비밀글
     if tags
-      .user-tags
+      .user-tags(data-tag=tag)
         .tags Tags
-        button.tag
-          span.tag-name.tag-selected= 'All ' + `${posts.length}`
-        for tag in Object.keys(tags)
-          button.tag
-            span.tag-name= tag + ' ' + tags[tag]
+        button.tag(onclick=`location.href='/user/${owner.username}'`)
+          if tag
+            span.tag-name= 'All ' + `${posts.length}`
+          else
+            span.tag-name.tag-selected= 'All ' + `${posts.length}`
+        for t in Object.keys(tags)
+          button.tag(onclick=`location.href='/user/${owner.username}?tag=${t}'`)
+            if t === tag
+              span.tag-name.tag-selected= t + ' ' + tags[t]
+            else
+              span.tag-name= t + ' ' + tags[t]
     .posts
       for post in posts
         .post-card
@@ -56,7 +64,45 @@ block content
             if post.thumbnail
               .post-right
                 image#post-thumbnail(src=`${post.thumbnail}` alt='thumbnail')
-  //- script.
+          if user && user.id === owner.id
+            .manage-buttons
+              button.modify.btn(onclick=`location.href='/post?id=${post.id}'`) 수정
+              button.delete.btn(data-post-id=post.id) 삭제
+  script.
+    //- var tag = document.querySelector('.user-tags').dataset.tag;
+    //- if(tag) {
+      
+    //- }
+    document.querySelectorAll('.delete').forEach(function (tag) {
+      tag.addEventListener('click', function () {
+        if(confirm('삭제하시겠습니까?')) {
+          var xhr = new XMLHttpRequest();
+          xhr.onload = function () {
+            if (xhr.status === 200) {
+              location.reload();
+            } else {
+              console.error(xhr.responseText);
+            }
+          };
+          xhr.open('DELETE', '/post/' + this.dataset.postId);
+          xhr.send();
+        }
+      });
+    });
+    //- document.querySelectorAll('.modify').forEach(function (tag) {
+    //-   tag.addEventListener('click', function () {
+    //-     var xhr = new XMLHttpRequest();
+    //-     xhr.onload = function () {
+    //-       if (xhr.status === 200) {
+    //-         location.reload();
+    //-       } else {
+    //-         console.error(xhr.responseText);
+    //-       }
+    //-     };
+    //-     xhr.open('POST', '/post/' + this.dataset.postId);
+    //-     xhr.send();
+    //-   });
+    //- });
   //-   document.getElementById('new-order').addEventListener('click', function() {
   //-     if(!this.classList.contains('selected')) {
   //-       this.classList.add('selected');
