@@ -106,7 +106,6 @@ block content
       }
     };
     document.getElementById('temp').addEventListener('click', function() {
-      var formData = new FormData();
       var title = document.getElementById('edit-title').value;
       var data = {
         "id": postTemp,
@@ -133,7 +132,6 @@ block content
       xhr.send(JSON.stringify(data));      
     });
     document.getElementById('publish').addEventListener('click', function() {
-      var formData = new FormData();
       var title = document.getElementById('edit-title').value;
       var data = {
         "id": postTemp,

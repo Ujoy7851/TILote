@@ -1,0 +1,55 @@
+extends layout
+
+block link
+  link(rel="stylesheet", href="/css/setting.css")
+
+block content
+  .main-container
+    .setting-container
+      .thumbnail-preview
+        h3 프로필 이미지
+        img#img-preview(src=`${user.thumbnail}` alt='미리보기' onerror="this.src='placeholder.png'")
+        input#img-url(type='hidden' name='url')
+        .preview-buttons
+          label#img-label(for='img') 사진 선택
+          input#img(type='file' accept='image/*')
+          button.cancel#cancel 취소
+      .editor-about
+        h3 자기 소개
+        textarea#edit-about(placeholder='255자 이내')
+        .editor-count
+    .buttons
+      button.btn.save 저장
+  script.
+    document.getElementById('edit-about').onkeyup = function() {
+      if(this.value.length > 255) {
+        document.querySelector('.editor-count').innerHTML = '최대 255자까지 입력 가능합니다.';
+        this.value = this.value.substring(0, 255);
+      } else if(this.value.length < 250) {
+        document.querySelector('.editor-count').innerHTML = '';
+      }
+    };
+    document.querySelector('.save').addEventListener('click', function() {
+      var title = document.getElementById('edit-title').value;
+      var data = {
+        "id": postTemp,
+        "title": title,
+        "content": simplemde.value(),
+        "tag": document.getElementById('edit-tag').value,
+        "is_private": document.getElementById('is-private').checked,
+        "description": document.getElementById('edit-description').value,
+        "thumbnail": document.getElementById('img-url').value
+      };
+      var xhr = new XMLHttpRequest();
+      xhr.onload = function() {
+        if(xhr.status === 403) {
+          alert('로그인이 필요합니다.');
+        } else if(xhr.status === 201) {
+          var username = JSON.parse(xhr.responseText)['username'];
+          location.href = `/user/${username}`;
+        }
+      };
+      xhr.open('POST', '/setting');
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify(data));
+    });

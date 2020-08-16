@@ -11,7 +11,7 @@
 .profile {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  justify-content: space-between;
   /* position: absolute;
   left: 2rem;
   top: 5rem;
@@ -24,11 +24,25 @@
   margin: 0 1rem;
 }
 
+.profile-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 #profile-icon {
   color: white;
   background-color: #c166fd34;
   font-size: 5rem;
   border-radius: 50%;
+  /* padding: 0.1rem; */
+  margin: 1rem 1rem;
+}
+
+#setting-icon {
+  color: #c166fd;
+  font-size: 1rem;
+  /* border-radius: 50%; */
   /* padding: 0.1rem; */
   margin: 1rem 1rem;
 }
@@ -365,4 +379,9 @@ nav {
   font-size: 0.8rem;
   padding: 0 0.5rem;
   background-color: white;
+}
+
+.setting-btn {
+  border: none;
+  background: none;
 }

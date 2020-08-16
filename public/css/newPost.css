@@ -136,3 +136,12 @@
   border: 1px solid #bbbbbb;
   margin: 0.3rem 0;
 }
+
+#edit-description:focus {
+  outline-style: none;
+}
+
+hr {
+  border-top: thin solid #bbbbbb;
+  border-bottom: none;
+}

@@ -6,14 +6,18 @@ block link
 block content
   .main-container
     .profile
-      .profile-thumbnail
-        if owner.thumbnail
-          image(src=owner.thumbnail alt='thumbnail')
-        else
-          i.material-icons#profile-icon person
-      .profile-info
-        .profile-name=owner.username
-        .profile-about ollitia enim doloremque, repellendus neque excepturi aspernatur quas esse?
+      .profile-left
+        .profile-thumbnail
+          if owner.thumbnail
+            image(src=owner.thumbnail alt='thumbnail')
+          else
+            i.material-icons#profile-icon person
+        .profile-info
+          .profile-name=owner.username
+          .profile-about ollitia enim doloremque, repellendus neque excepturi aspernatur quas esse?
+      if user && user.id === owner.id
+        button.setting-btn(onclick='location.href="/settings"')
+          i.material-icons#setting-icon settings
       //- hr
     nav
       button.nav-btn.btn-selected#new-order 작성글

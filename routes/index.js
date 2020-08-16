@@ -2,6 +2,7 @@ const express = require('express');
 const { Op } = require("sequelize");
 const router = express.Router();
 const { User, Post } = require('../models');
+const { isLoggedIn } = require('./middlewares');
 
 router.get('/', async (req, res, next) => {
   try {    
@@ -59,6 +60,13 @@ router.get('/join', (req, res, next) => {
   res.render('join', {
     joinError: req.flash('joinError')
   });
+});
+
+router.get('/settings', isLoggedIn, (req, res, next) => {
+  console.log('*************');
+  res.render('settings', {
+    user: req.user
+  })
 });
 
 module.exports = router;

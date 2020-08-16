@@ -42,6 +42,10 @@ button {
   cursor: pointer;
 }
 
+button:focus {
+  outline-style: none;
+}
+
 .btn {
   height: 2rem;
   padding: 0 0.7rem;
@@ -51,8 +55,7 @@ button {
   cursor: pointer;
   border-radius: 0.5rem;
   /* border-style: none; */
-  border-color: #303337;
-  border-width: thin;
+  border: thin solid #303337;
   background: white;
   margin-left: 0.1rem;
   margin-right: 0.1rem;
@@ -90,4 +93,9 @@ button {
 
 .btn:focus {
   outline-style: none;
+}
+
+.btn:hover {
+  border-color: #c166fd;
+  color: #c166fd;
 }
