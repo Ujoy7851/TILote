@@ -63,10 +63,24 @@ router.get('/join', (req, res, next) => {
 });
 
 router.get('/settings', isLoggedIn, (req, res, next) => {
-  console.log('*************');
   res.render('settings', {
     user: req.user
   })
+});
+
+router.post('/settings', isLoggedIn, async (req, res, next) => {
+  try {
+    await User.update({
+      about: req.body.about,
+      thumbnail: req.body.thumbnail
+    }, {
+      where: { id: req.user.id }
+    });
+    res.status(201).send({ username: req.user.username });
+  } catch(error) {
+    console.error(error);
+    next(error);
+  }
 });
 
 module.exports = router;

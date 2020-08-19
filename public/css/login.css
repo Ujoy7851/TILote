@@ -16,19 +16,23 @@
   border: 0;
   border-radius: 1rem;
   box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
-  text-align: center;
+  /* text-align: center; */
   /* padding: 2rem; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-@media screen and (max-width: 25rem) {
+/* @media screen and (max-width: 25rem) {
   .login-card {
     width: auto;
   }
-}
+} */
 
 .login-title {
   font-weight: 300;
   font-size: 1.5rem;
-  margin: 0.5rem 0;
+  margin-bottom: 1.5rem;
 }
 
 .input-group {
@@ -36,11 +40,15 @@
   margin-bottom: 1rem;
 }
 
-.input-group > input {
+input {
   height: auto;
   padding: 0.5rem 1rem;
-  /* border-radius: 1rem; */
-  border: 1px soild black;
+  border-radius: 0.5rem;
+  border: thin solid black;
+}
+
+input:focus {
+  outline-style: none;
 }
 
 .login-card .btn {

@@ -8,7 +8,10 @@ block content
     .setting-container
       .thumbnail-preview
         h3 프로필 이미지
-        img#img-preview(src=`${user.thumbnail}` alt='미리보기' onerror="this.src='placeholder.png'")
+        if user.thumbnail
+          img#img-preview(src=`${user.thumbnail}` alt='미리보기' onerror="this.src='placeholder.png'")
+        else
+          img#img-preview(src='' alt='미리보기' onerror="this.src='placeholder.png'")
         input#img-url(type='hidden' name='url')
         .preview-buttons
           label#img-label(for='img') 사진 선택
@@ -19,7 +22,7 @@ block content
         textarea#edit-about(placeholder='255자 이내')
         .editor-count
     .buttons
-      button.btn.save 저장
+      button.btn#save 저장
   script.
     document.getElementById('edit-about').onkeyup = function() {
       if(this.value.length > 255) {
@@ -29,15 +32,9 @@ block content
         document.querySelector('.editor-count').innerHTML = '';
       }
     };
-    document.querySelector('.save').addEventListener('click', function() {
-      var title = document.getElementById('edit-title').value;
+    document.getElementById('save').addEventListener('click', function() {
       var data = {
-        "id": postTemp,
-        "title": title,
-        "content": simplemde.value(),
-        "tag": document.getElementById('edit-tag').value,
-        "is_private": document.getElementById('is-private').checked,
-        "description": document.getElementById('edit-description').value,
+        "about": document.getElementById('edit-about').value,
         "thumbnail": document.getElementById('img-url').value
       };
       var xhr = new XMLHttpRequest();
@@ -49,7 +46,25 @@ block content
           location.href = `/user/${username}`;
         }
       };
-      xhr.open('POST', '/setting');
+      xhr.open('POST', '/settings');
       xhr.setRequestHeader('Content-Type', 'application/json');
       xhr.send(JSON.stringify(data));
+    });
+    document.getElementById('img').addEventListener('change', function (e) {
+      var formData = new FormData();
+      //- console.log(this, this.files);
+      formData.append('img', this.files[0]);
+      var xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          var url = JSON.parse(xhr.responseText).url;
+          document.getElementById('img-url').value = url;
+          document.getElementById('img-preview').src = url;
+          document.getElementById('img-preview').style.display = 'inline';
+        } else {
+          console.error(xhr.responseText);
+        }
+      };
+      xhr.open('POST', '/post/img');
+      xhr.send(formData);
     });
