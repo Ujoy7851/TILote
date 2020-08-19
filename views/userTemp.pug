@@ -1,19 +1,23 @@
 extends layout
 
 block link
-  link(rel="stylesheet", href="/css/user.css")
+  link(rel="stylesheet", href="/css/userTemp.css")
 
 block content
   .main-container
     .profile
-      .profile-thumbnail
-        if owner.thumbnail
-          image(src=owner.thumbnail alt='thumbnail')
-        else
-          i.material-icons#profile-icon person
-      .profile-info
-        .profile-name=owner.username
-        .profile-about ollitia enim doloremque, repellendus neque excepturi aspernatur quas esse?
+      .profile-left
+        .profile-thumbnail
+          if owner.thumbnail
+            image(src=owner.thumbnail alt='thumbnail')
+          else
+            i.material-icons#profile-icon person
+        .profile-info
+          .profile-name=owner.username
+          .profile-about= owner.about
+      if user && user.id === owner.id
+        button.setting-btn(onclick='location.href="/settings"')
+          i.material-icons#setting-icon settings
     nav
       button.nav-btn#new-order(onclick=`location.href="/user/${owner.username}"`) 작성글
       button.nav-btn#like-order(onclick=`location.href="/user/${owner.username}/likes"`) 좋아요한 글
@@ -30,16 +34,16 @@ block content
             .post-left
               .post-top
                 .post-title= post.title.length > 25 ? post.title.substring(0, 25) + '...' : post.title
-                if post.description
-                  -const content = post.description.length > 70 ? post.description.substring(0, 70) + '...' : post.description
-                  .post-content= content
+                //- if post.description
+                //-   -const content = post.description.length > 70 ? post.description.substring(0, 70) + '...' : post.description
+                //-   .post-content= content
               .post-bottom
                 .post-info
                   .post-detail-info
                     .post-updated= post.updatedAt.toString().substring(4, 21)
-            if post.thumbnail
-              .post-right
-                image#post-thumbnail(src=`${post.thumbnail}` alt='thumbnail')
+            //- if post.thumbnail
+            //-   .post-right
+            //-     image#post-thumbnail(src=`${post.thumbnail}` alt='thumbnail')
           if user && user.id === owner.id
             .manage-buttons
               button.delete.btn(data-post-id=post.id) 삭제

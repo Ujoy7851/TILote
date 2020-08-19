@@ -11,7 +11,7 @@
 .profile {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  justify-content: space-between;
   /* position: absolute;
   left: 2rem;
   top: 5rem;
@@ -24,11 +24,45 @@
   margin: 0 1rem;
 }
 
+.profile-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.profile-thumbnail {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 1rem 1rem;
+}
+
+.profile-thumbnail > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* margin: 1rem 1rem; */
+}
+
 #profile-icon {
   color: white;
   background-color: #c166fd34;
   font-size: 5rem;
-  border-radius: 50%;
+  /* border-radius: 50%; */
+  /* padding: 0.1rem; */
+  /* margin: 1rem 1rem; */
+}
+
+.setting-btn {
+  border: none;
+  background: none;
+}
+
+#setting-icon {
+  color: #c166fd;
+  font-size: 1rem;
+  /* border-radius: 50%; */
   /* padding: 0.1rem; */
   margin: 1rem 1rem;
 }
@@ -111,7 +145,7 @@ nav {
   /* display: flex;
   flex-direction: row;
   justify-content: space-between; */
-  height: 5rem;
+  height: 7rem;
   width: 90%;
   background-color: white;
   border: 0;
@@ -130,10 +164,10 @@ nav {
   padding: 1rem;
   height: 100%;
   width: 100%;
-  /* display: flex;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start; */
+  align-items: flex-start;
 }
 
 @media screen and (max-width: 60rem) {
@@ -168,9 +202,13 @@ nav {
   .post:hover {
     box-shadow: none;
   }
+
+  .manage-buttons {
+    margin: 0 0 1rem 0;
+  }
 }
 
-.post-top {
+.post-top, .post-bottom {
   text-align: left;
   width: 100%;
 }

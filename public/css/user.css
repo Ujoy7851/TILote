@@ -293,6 +293,10 @@ nav {
   .user-tags {
     justify-content: left;
   }
+
+  .manage-buttons {
+    margin: 1rem;
+  }
 }
 
 /* @media screen and (max-width: 25rem) {

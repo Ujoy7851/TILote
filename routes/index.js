@@ -64,7 +64,9 @@ router.get('/join', (req, res, next) => {
 
 router.get('/settings', isLoggedIn, (req, res, next) => {
   res.render('settings', {
-    user: req.user
+    user: req.user,
+    about: req.user.about,
+    thumbnail: req.user.thumbnail
   })
 });
 

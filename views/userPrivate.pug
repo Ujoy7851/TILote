@@ -6,14 +6,18 @@ block link
 block content
   .main-container
     .profile
-      .profile-thumbnail
-        if owner.thumbnail
-          image(src=owner.thumbnail alt='thumbnail')
-        else
-          i.material-icons#profile-icon person
-      .profile-info
-        .profile-name=owner.username
-        .profile-about ollitia enim doloremque, repellendus neque excepturi aspernatur quas esse?
+      .profile-left
+        .profile-thumbnail
+          if owner.thumbnail
+            image(src=owner.thumbnail alt='thumbnail')
+          else
+            i.material-icons#profile-icon person
+        .profile-info
+          .profile-name=owner.username
+          .profile-about= owner.about
+      if user && user.id === owner.id
+        button.setting-btn(onclick='location.href="/settings"')
+          i.material-icons#setting-icon settings
       //- hr
     nav
       button.nav-btn#new-order(onclick=`location.href="/user/${owner.username}"`) 작성글
@@ -38,6 +42,9 @@ block content
                 .post-info
                   .post-detail-info
                     .post-updated= post.published_at.toString().substring(4, 21)
+            if post.thumbnail
+              .post-right
+                image#post-thumbnail(src=`${post.thumbnail}` alt='thumbnail')
           if user && user.id === owner.id
             .manage-buttons
               button.modify.btn(onclick=`location.href='/post?id=${post.id}'`) 수정

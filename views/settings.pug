@@ -9,17 +9,17 @@ block content
       .thumbnail-preview
         h3 프로필 이미지
         if user.thumbnail
-          img#img-preview(src=`${user.thumbnail}` alt='미리보기' onerror="this.src='placeholder.png'")
+          img#img-preview(src=`${thumbnail}` alt='미리보기' onerror="this.src='placeholder.png'")
         else
           img#img-preview(src='' alt='미리보기' onerror="this.src='placeholder.png'")
-        input#img-url(type='hidden' name='url')
+        input#img-url(type='hidden' name='url' value=`${thumbnail}`)
         .preview-buttons
           label#img-label(for='img') 사진 선택
           input#img(type='file' accept='image/*')
           button.cancel#cancel 취소
       .editor-about
         h3 자기 소개
-        textarea#edit-about(placeholder='255자 이내')
+        textarea#edit-about(placeholder='255자 이내')= about
         .editor-count
     .buttons
       button.btn#save 저장
