@@ -149,3 +149,36 @@ i {
   bottom: 2rem;
   font-weight: bold;
 }
+
+.pagination {
+  /* display: flex;
+  flex-direction: row;
+  justify-content: space-between; */
+  position: relative;
+  width: 100%;
+  /* height: 100%; */
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+}
+
+.prev-post {
+  position: absolute;
+  left: 0;
+  width: 18rem;
+  padding: 0.5rem;
+  height: 3rem;
+  background-color: #c166fd34;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.next-post {
+  position: absolute;
+  right: 0;
+  width: 18rem;
+  padding: 0.5rem;
+  height: 3rem;
+  background-color: #c166fd34;
+  border: none;
+  border-radius: 0.5rem;
+}

@@ -7,18 +7,13 @@ module.exports = class Comment extends Sequelize.Model {
         type: Sequelize.TEXT,
         allowNull: false
       },
-      level: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-        defaultValue: 0
-      },
-      reply_to: {
+      parent_comment: {
         type: Sequelize.UUID,
         allowNull: true
       },
-      has_replies: {
+      is_deleted: {
         type: Sequelize.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
         defalutValue: false
       }
     }, {
@@ -35,5 +30,6 @@ module.exports = class Comment extends Sequelize.Model {
 
   static associate(db) {
     db.Comment.belongsTo(db.Post);
+    db.Comment.belongsTo(db.User);
   }
 };

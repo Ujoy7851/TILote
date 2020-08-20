@@ -11,7 +11,7 @@ block link
 
 block content
   .post-container(data-post-id=post.id)
-    .post-title= post.title
+    h1.post-title= post.title
     .post-info
       .post-author-image
         if post.User.thumbnail
@@ -38,6 +38,24 @@ block content
           i.material-icons favorite
     .top-btn
       a(href='#') TOP
+    //- .pagination
+    //-   if prev
+    //-     button.prev-post= prev.title.substring(0, 25)
+    //-   if next
+    //-     button.next-post= next.title.substring(0, 25)
+    .comments
+      -const commentLength = comments? comments.length : 0
+      h4= `${commentLength}개의 댓글`
+      for comment in comments
+        .comment
+          .comment-author= comment.User.username
+          .comment-content= comment.content
+          .comment-info= comment.createdAt
+    if user
+      form#comment-form(action=`/comments?postId=${post.id}` method='post')
+        textarea#comment-content(name='content' placeholder='댓글을 입력하세요.')
+        button.write(type='button') 댓글 쓰기
+        span.comment-error
   script.
     var likeBtn = document.querySelector('.like');
     if(likeBtn) {
@@ -75,3 +93,13 @@ block content
         xhr.send();
       });
     }
+    document.querySelector('.write').addEventListener('click', function() {
+      var content = document.getElementById('comment-content').value;
+      if(!content) {
+        console.log('this', this);
+        console.log('parent', this.parentNode)
+        this.parentNode.querySelector('.comment-error').innerHTML = '댓글을 입력하세요.'
+      } else {
+        document.getElementById('comment-form').submit();
+      }
+    })

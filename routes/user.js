@@ -79,19 +79,18 @@ router.get('/:username', async (req, res, next) => {
         },
         order: [['published_at', 'DESC']]
       });
-      let tags = await Promise.all(posts.map(async post => {
-        let tagsTemp = await post.getTags();
-        return Promise.all(tagsTemp.map(t => {
-          let tag = t['dataValues']['name'];
-          return tag;
-        }))
+      let tags = await Promise.all(
+        posts.map(async post => {
+          let tagsTemp = await post.getTags();
+          return Promise.all(tagsTemp.map(t => {
+            let tag = t['dataValues']['name'];
+            return tag;
+          }));
       }));
       tags = tags.filter(t => !!t).reduce((a, c) => {
         c.map(tag => a[tag] = a[tag] ? a[tag] + 1 : 1);
         return a;
       }, {});
-      // let tags = { test: 3, node: 1, '태그': 1, redis: 1, express: 1, nodejs: 71, sequelize: 1, user: 5, abcdef: 1, text: 3, verylongtagname: 81, moretag:77 };
-      // console.log(tags);
       if(req.query.tag) {
         const tag = await Tag.findOne({
           where: { name: req.query.tag }

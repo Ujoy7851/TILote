@@ -5,8 +5,9 @@ const path = require('path');
 const marked = require('marked');
 const hljs = require('highlight.js');
 const removeMd = require('remove-markdown');
+const { Op } = require("sequelize");
 const { isLoggedIn } = require('./middlewares');
-const { Post, User, Tag, sequelize } = require('../models');
+const { Post, User, Tag, sequelize, Comment } = require('../models');
 const router = express.Router();
 
 fs.readdir('uploads', (error) => {
@@ -180,8 +181,47 @@ router.get('/:postId', async (req, res, next) => {
         as: 'Liker'
       }]
     });
+
+    const nextId = await Post.min('id', {
+      where: {
+        user_id: post.UserId,
+        id: {
+          [Op.gt]: post.id
+        }
+      }
+    });
+    const prevId = await Post.max('id', {
+      where: {
+        user_id: post.UserId,
+        id: {
+          [Op.lt]: post.id
+        }
+      }
+    });
+    let prevPost, nextPost;
+    if(prevId) {
+      prevPost = await Post.findOne({
+        where: { id: prevId }
+      });
+    }
+    if(nextId) {
+      nextPost = await Post.findOne({
+        where: { id: nextId }
+      });
+    }
+
     let tags = await post.getTags();
     tags = tags.map(t => t['dataValues']);
+
+    const comments = await Comment.findAll({
+      where: { PostId: post.id },
+      include: [{
+        model: User,
+        attributes: [ 'id', 'username' ]
+      }],
+      order: [['created_at', 'DESC']]
+    });
+
     if(post) {
       marked.setOptions({
         headerIds: false,
@@ -192,9 +232,12 @@ router.get('/:postId', async (req, res, next) => {
         post,
         user: req.user,
         content,
-        tags
+        tags,
+        prev: prevPost,
+        next: nextPost,
+        comments
       });
-    }    
+    }
   } catch(error) {
     console.error(error);
     next(error);

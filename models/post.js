@@ -57,5 +57,6 @@ module.exports = class Post extends Sequelize.Model {
       through: 'Like',
       as: 'Liker'
     });
+    db.User.hasMany(db.Comment);
   }
 };
