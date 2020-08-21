@@ -1,5 +1,8 @@
 extends layout
 
+include comment
+include commentForm
+
 block link
   //- link(rel='stylesheet' href='https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css')
   link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/a11y-light.min.css")
@@ -47,15 +50,13 @@ block content
       -const commentLength = comments? comments.length : 0
       h4= `${commentLength}개의 댓글`
       for comment in comments
-        .comment
-          .comment-author= comment.User.username
-          .comment-content= comment.content
-          .comment-info= comment.createdAt
+        +comment(user, post, comment)
     if user
-      form#comment-form(action=`/comments?postId=${post.id}` method='post')
-        textarea#comment-content(name='content' placeholder='댓글을 입력하세요.')
-        button.write(type='button') 댓글 쓰기
-        span.comment-error
+      //- form#comment-form(action=`/comments?postId=${post.id}` method='post')
+      //-   textarea#comment-content(name='content' placeholder='댓글을 입력하세요.')
+      //-   button.write(type='button') 댓글 쓰기
+      //-   span.comment-error
+      +comment-form(null, `/comments?postId=${post.id}`, null)
   script.
     var likeBtn = document.querySelector('.like');
     if(likeBtn) {
@@ -93,13 +94,48 @@ block content
         xhr.send();
       });
     }
-    document.querySelector('.write').addEventListener('click', function() {
-      var content = document.getElementById('comment-content').value;
-      if(!content) {
-        console.log('this', this);
-        console.log('parent', this.parentNode)
-        this.parentNode.querySelector('.comment-error').innerHTML = '댓글을 입력하세요.'
-      } else {
-        document.getElementById('comment-form').submit();
-      }
-    })
+    //- document.querySelector('.write').addEventListener('click', function() {
+    //-   var content = document.getElementById('comment-content').value;
+    //-   if(!content) {
+    //-     this.parentNode.querySelector('.comment-error').innerHTML = '댓글을 입력하세요.'
+    //-   } else {
+    //-     //- document.getElementById('comment-form').submit();
+    //-     this.parentElement.submit();
+    //-   }
+    //- });
+    document.querySelectorAll('.reply').forEach(function(replyButton) {
+      replyButton.addEventListener('click', function() {
+        console.log('reply!!!!!!');
+        var commentId = this.dataset.id;
+        var replyEnabled = document.querySelector('.comment-reply-enabled');
+        var editEnabled = document.querySelector('.comment-edit-enabled');
+        if(replyEnabled) {
+          replyEnabled.classList.remove('comment-reply-enabled');
+        }
+        if(editEnabled) {
+          editEnabled.classList.remove('comment-edit-enabled');
+        }
+        document.getElementById(`comment-${commentId}`).classList.add('comment-reply-enabled');
+      });
+    });
+    document.querySelectorAll('.edit').forEach(function(editButton) {
+      editButton.addEventListener('click', function() {
+        var commentId = this.dataset.id;
+        var replyEnabled = document.querySelector('.comment-reply-enabled');
+        var editEnabled = document.querySelector('.comment-edit-enabled');
+        if(replyEnabled) {
+          replyEnabled.classList.remove('comment-reply-enabled');
+        }
+        if(editEnabled) {
+          editEnabled.classList.remove('comment-edit-enabled');
+        }
+        document.getElementById(`comment-${commentId}`).classList.add('comment-edit-enabled');
+      });
+    });
+    document.querySelectorAll('.delete').forEach(function(deleteButton) {
+      deleteButton.addEventListener('click', function() {
+        if(confirm('삭제하시겠습니까?')) {
+          this.parentElement.submit();
+        }
+      });
+    });

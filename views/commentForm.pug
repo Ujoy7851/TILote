@@ -1,0 +1,42 @@
+mixin comment-form(comment, actionUrl, parentComment)
+  form(action=actionUrl method='post')
+    if parentComment
+      input(type='hidden' name='parentComment' value=parentComment)
+    //- if comment
+    textarea.comment-content(name='content' placeholder='댓글을 입력하세요.') #{comment ? comment.content : ''}
+    //- else
+    //-   textarea.comment-content(name='content' placeholder='댓글을 입력하세요.')
+    if comment
+      button.submit.form-edit(type='button') 수정
+      button.form-edit-cancel(type='button' data-id=comment.id) 취소
+    else if parentComment
+      button.submit.form-reply(type='button') 대댓글 달기
+      button.form-reply-cancel(type='button' data-id=parentComment) 취소
+    else
+      button.submit.form-comment(type='button') 댓글 달기
+    span.comment-error
+  script.
+    document.querySelectorAll('.submit').forEach(function(editButton) {
+      editButton.addEventListener('click', function() {
+        var form = this.parentElement;
+        var content = form.querySelector('.comment-content').value;
+        if(!content) {
+          form.querySelector('.comment-error').innerHTML = '댓글을 입력하세요.'
+        } else {
+          form.submit();
+        }
+      });
+    });
+    document.querySelectorAll('.form-edit-cancel').forEach(function(cancelButton) {
+      cancelButton.addEventListener('click', function() {
+        var commentId = this.dataset.id;
+        document.getElementById(`comment-${commentId}`).classList.remove('comment-edit-enabled');
+      });
+    });
+    document.querySelectorAll('.form-reply-cancel').forEach(function(cancelButton) {
+      cancelButton.addEventListener('click', function() {
+        var commentId = this.dataset.id;
+        document.getElementById(`comment-${commentId}`).classList.remove('comment-reply-enabled');
+      });
+    });
+      

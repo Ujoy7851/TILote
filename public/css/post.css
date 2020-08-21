@@ -182,3 +182,15 @@ i {
   border: none;
   border-radius: 0.5rem;
 }
+
+.comment-edit,
+.comment-reply-form,
+.comment-edit-enabled .comment-show, 
+.comment-edit-enabled .comment-manage {
+  display: none;
+}
+
+.comment-edit-enabled .comment-edit,
+.comment-reply-enabled .comment-reply-form {
+  display: inherit;
+}

@@ -214,7 +214,10 @@ router.get('/:postId', async (req, res, next) => {
     tags = tags.map(t => t['dataValues']);
 
     const comments = await Comment.findAll({
-      where: { PostId: post.id },
+      where: { 
+        PostId: post.id,
+        is_deleted: false
+      },
       include: [{
         model: User,
         attributes: [ 'id', 'username' ]

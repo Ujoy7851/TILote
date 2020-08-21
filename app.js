@@ -7,6 +7,7 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const redis = require('redis');
 const RedisStore = require('connect-redis')(session);
+const methodOverride = require('method-override');
 // const helmet = require('helmet');
 // const hpp = require('hpp');
 require('dotenv').config();
@@ -67,6 +68,7 @@ app.use(session(sessionOption));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride('_method'));
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);

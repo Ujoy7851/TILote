@@ -1,0 +1,25 @@
+include commentForm
+
+mixin comment(user, post, comment)
+  .comment(id=`comment-${comment.id}`)
+    .comment-show
+      .comment-author= comment.User.username
+      .comment-content= comment.content
+      .comment-info= comment.createdAt
+    if user
+      .comment-reply
+        a.reply(data-id=comment.id) 대댓글
+      if comment.User.id === user.id
+        .comment-manage
+          a.edit(data-id=comment.id) 수정
+          form(action=`/comments/${comment.id}?postId=${post.id}&_method=DELETE` method='post')
+            a.delete 삭제
+        .comment-edit
+          +comment-form(comment, `/comments/${comment.id}?postId=${post.id}&_method=PUT`, null)
+    if user
+      //- form.comment-reply#comment-form(action=`/comments?postId=${post.id}` method='post')
+      //-   textarea#comment-content(name='content' placeholder='댓글을 입력하세요.')
+      //-   button.write(type='button') 댓글 쓰기
+      //-   span.comment-error
+      .comment-reply-form
+        +comment-form(null, `/comments?postId=${post.id}`, comment.id)
