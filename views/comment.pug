@@ -16,10 +16,15 @@ mixin comment(user, post, comment)
             a.delete 삭제
         .comment-edit
           +comment-form(comment, `/comments/${comment.id}?postId=${post.id}&_method=PUT`, null)
-    if user
-      //- form.comment-reply#comment-form(action=`/comments?postId=${post.id}` method='post')
-      //-   textarea#comment-content(name='content' placeholder='댓글을 입력하세요.')
-      //-   button.write(type='button') 댓글 쓰기
-      //-   span.comment-error
       .comment-reply-form
         +comment-form(null, `/comments?postId=${post.id}`, comment.id)
+    if comment.childComments
+      for childComment in comment.childComments
+        +comment(user, post, childComment)
+    //- if user
+    //-   //- form.comment-reply#comment-form(action=`/comments?postId=${post.id}` method='post')
+    //-   //-   textarea#comment-content(name='content' placeholder='댓글을 입력하세요.')
+    //-   //-   button.write(type='button') 댓글 쓰기
+    //-   //-   span.comment-error
+    //-   .comment-reply-form
+    //-     +comment-form(null, `/comments?postId=${post.id}`, comment.id)

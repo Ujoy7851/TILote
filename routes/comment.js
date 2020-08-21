@@ -13,8 +13,8 @@ router.post('/', isLoggedIn, async (req, res, next) => {
         UserId: req.user.id,
         PostId: post.id,
         content: req.body.content,
-        is_deleted: false
-        // parent_comment: req.body.parent
+        is_deleted: false,
+        parent_comment: req.body.parentComment
       });
     }
     // console.log(post);

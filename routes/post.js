@@ -8,6 +8,7 @@ const removeMd = require('remove-markdown');
 const { Op } = require("sequelize");
 const { isLoggedIn } = require('./middlewares');
 const { Post, User, Tag, sequelize, Comment } = require('../models');
+const { convertToTrees } = require('../public/js/util');
 const router = express.Router();
 
 fs.readdir('uploads', (error) => {
@@ -225,6 +226,8 @@ router.get('/:postId', async (req, res, next) => {
       order: [['created_at', 'DESC']]
     });
 
+    const commentsTree = convertToTrees(comments, 'id', 'parent_comment', 'childComments');
+
     if(post) {
       marked.setOptions({
         headerIds: false,
@@ -238,7 +241,8 @@ router.get('/:postId', async (req, res, next) => {
         tags,
         prev: prevPost,
         next: nextPost,
-        comments
+        commentLength: comments.length,
+        commentsTree
       });
     }
   } catch(error) {

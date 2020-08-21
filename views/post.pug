@@ -47,9 +47,9 @@ block content
     //-   if next
     //-     button.next-post= next.title.substring(0, 25)
     .comments
-      -const commentLength = comments? comments.length : 0
-      h4= `${commentLength}개의 댓글`
-      for comment in comments
+      //- -const length = commentsLength? commentLength : 0
+      h4= `${commentLength || 0}개의 댓글`
+      for comment in commentsTree
         +comment(user, post, comment)
     if user
       //- form#comment-form(action=`/comments?postId=${post.id}` method='post')
