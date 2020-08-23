@@ -2,6 +2,7 @@ let util = {};
 
 util.convertToTrees = function(array, idFieldName, parentIdFieldName, childrenFieldName){
   let cloned = array.slice();
+  let numOfChild = 0;
 
   for(let i = cloned.length - 1; i > -1; i--){
     let parentId = cloned[i][parentIdFieldName];
@@ -15,17 +16,17 @@ util.convertToTrees = function(array, idFieldName, parentIdFieldName, childrenFi
         let parent = filtered[0];
 
         if(parent[childrenFieldName]){
-          parent[childrenFieldName].push(cloned[i]);
+          parent[childrenFieldName].unshift(cloned[i]);
         }
         else {
           parent[childrenFieldName] = [cloned[i]];
         }
-
+        numOfChild++;
       }
       cloned.splice(i,1);
     }
   }
-  return cloned;
+  return [cloned, numOfChild];
 }
 
 module.exports = util;

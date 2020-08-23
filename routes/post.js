@@ -226,7 +226,7 @@ router.get('/:postId', async (req, res, next) => {
       order: [['created_at', 'DESC']]
     });
 
-    const commentsTree = convertToTrees(comments, 'id', 'parent_comment', 'childComments');
+    const [commentsTree, numOfChild] = convertToTrees(comments, 'id', 'parent_comment', 'childComments');
 
     if(post) {
       marked.setOptions({
@@ -241,7 +241,7 @@ router.get('/:postId', async (req, res, next) => {
         tags,
         prev: prevPost,
         next: nextPost,
-        commentLength: comments.length,
+        commentLength: commentsTree.length + numOfChild,
         commentsTree
       });
     }
@@ -253,7 +253,6 @@ router.get('/:postId', async (req, res, next) => {
 
 router.post('/:postId/like', isLoggedIn, async (req, res, next) => {
   try {
-    console.log('================liked!');
     const post = await Post.findOne({
       where: { id: req.params.postId }
     });
@@ -262,7 +261,6 @@ router.post('/:postId/like', isLoggedIn, async (req, res, next) => {
     }, {
       where: { id: req.params.postId }
     });
-    console.log('===================', test);
     await post.addLiker(req.user.id);
     res.status(200).send();
   } catch(error) {
@@ -273,7 +271,6 @@ router.post('/:postId/like', isLoggedIn, async (req, res, next) => {
 
 router.post('/:postId/unlike', isLoggedIn, async (req, res, next) => {
   try {
-    console.log('==============unliked!');
     const post = await Post.findOne({
       where: { id: req.params.postId }
     });
@@ -282,7 +279,6 @@ router.post('/:postId/unlike', isLoggedIn, async (req, res, next) => {
     }, {
       where: { id: req.params.postId }
     });
-    console.log('===================', test);
     await post.removeLiker(req.user.id);
     res.status(200).send();
   } catch(error) {

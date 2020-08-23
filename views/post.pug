@@ -41,11 +41,11 @@ block content
           i.material-icons favorite
     .top-btn
       a(href='#') TOP
-    //- .pagination
-    //-   if prev
-    //-     button.prev-post= prev.title.substring(0, 25)
-    //-   if next
-    //-     button.next-post= next.title.substring(0, 25)
+    .pagination
+      if prev
+        button.prev-post(onclick=`location.href="/post/${prev.id}"`)= prev.title.substring(0, 25)
+      if next
+        button.next-post(onclick=`location.href="/post/${next.id}"`)= next.title.substring(0, 25)
     .comments
       //- -const length = commentsLength? commentLength : 0
       h4= `${commentLength || 0}개의 댓글`
@@ -105,7 +105,6 @@ block content
     //- });
     document.querySelectorAll('.reply').forEach(function(replyButton) {
       replyButton.addEventListener('click', function() {
-        console.log('reply!!!!!!');
         var commentId = this.dataset.id;
         var replyEnabled = document.querySelector('.comment-reply-enabled');
         var editEnabled = document.querySelector('.comment-edit-enabled');
@@ -116,10 +115,14 @@ block content
           editEnabled.classList.remove('comment-edit-enabled');
         }
         document.getElementById(`comment-${commentId}`).classList.add('comment-reply-enabled');
+        //- console.log(document.querySelector('.comment-reply-enabled').childNodes);
+        //- this.parentNode.parentNode.lastChild.classList.add('comment-reply-enabled');
+        //- console.log(this.parentNode.parentNode.lastChild);
       });
     });
     document.querySelectorAll('.edit').forEach(function(editButton) {
       editButton.addEventListener('click', function() {
+        console.log('edit!!!!!!');
         var commentId = this.dataset.id;
         var replyEnabled = document.querySelector('.comment-reply-enabled');
         var editEnabled = document.querySelector('.comment-edit-enabled');
@@ -130,6 +133,7 @@ block content
           editEnabled.classList.remove('comment-edit-enabled');
         }
         document.getElementById(`comment-${commentId}`).classList.add('comment-edit-enabled');
+        //- this.parentNode.parentNode.lastChild.classList.add('comment-edit-enabled');
       });
     });
     document.querySelectorAll('.delete').forEach(function(deleteButton) {
@@ -137,5 +141,28 @@ block content
         if(confirm('삭제하시겠습니까?')) {
           this.parentElement.submit();
         }
+      });
+    });
+    document.querySelectorAll('.submit').forEach(function(editButton) {
+      editButton.addEventListener('click', function() {
+        var form = this.parentElement;
+        var content = form.querySelector('.comment-form-content').value;
+        if(!content) {
+          form.querySelector('.comment-error').innerHTML = '댓글을 입력하세요.'
+        } else {
+          form.submit();
+        }
+      });
+    });
+    document.querySelectorAll('.form-edit-cancel').forEach(function(cancelButton) {
+      cancelButton.addEventListener('click', function() {
+        var commentId = this.dataset.id;
+        document.getElementById(`comment-${commentId}`).classList.remove('comment-edit-enabled');
+      });
+    });
+    document.querySelectorAll('.form-reply-cancel').forEach(function(cancelButton) {
+      cancelButton.addEventListener('click', function() {
+        var commentId = this.dataset.id;
+        document.getElementById(`comment-${commentId}`).classList.remove('comment-reply-enabled');
       });
     });

@@ -1,23 +1,40 @@
 include commentForm
 
 mixin comment(user, post, comment)
-  .comment(id=`comment-${comment.id}`)
-    .comment-show
-      .comment-author= comment.User.username
-      .comment-content= comment.content
-      .comment-info= comment.createdAt
+  .comment(id=`comment-${comment.id}` class=`${comment.parent_comment ? 'child-comment' : ''}`)
+    //- .comment-show
+    //-   .comment-author= comment.User.username
+    //-   .comment-content= comment.content
+    //-   .comment-info= comment.createdAt
+    //- if comment.is_deleted
+    //-   .deleted= '삭제된 댓글 입니다.'
+    //- else
+    .comment-info
+      .comment-author-image
+        if comment.User.thumbnail
+          image(src=comment.User.thumbnail alt='thumbnail')
+        else
+          i.material-icons#person-icon person
+      .comment-detail-info
+        .comment-author-name
+          a(href=`/user/${comment.User.username}`)= comment.User.username
+        .comment-created= comment.createdAt.toString().substring(4, 21)
+    .comment-content= comment.content
     if user
-      .comment-reply
-        a.reply(data-id=comment.id) 대댓글
-      if comment.User.id === user.id
-        .comment-manage
-          a.edit(data-id=comment.id) 수정
-          form(action=`/comments/${comment.id}?postId=${post.id}&_method=DELETE` method='post')
-            a.delete 삭제
-        .comment-edit
-          +comment-form(comment, `/comments/${comment.id}?postId=${post.id}&_method=PUT`, null)
-      .comment-reply-form
-        +comment-form(null, `/comments?postId=${post.id}`, comment.id)
+      .comment-buttons
+        .comment-reply
+          a.reply(data-id=comment.id) 대댓글
+        if comment.User.id === user.id
+          .comment-manage
+            span |
+            a.edit(data-id=comment.id) 수정
+            span |
+            form(action=`/comments/${comment.id}?postId=${post.id}&_method=DELETE` method='post')
+              a.delete 삭제
+          .comment-edit-form
+            +comment-form(comment, `/comments/${comment.id}?postId=${post.id}&_method=PUT`, null)
+        .comment-reply-form
+          +comment-form(null, `/comments?postId=${post.id}`, comment.id)
     if comment.childComments
       for childComment in comment.childComments
         +comment(user, post, childComment)
