@@ -35,6 +35,7 @@ mixin comment(user, post, comment)
             +comment-form(comment, `/comments/${comment.id}?postId=${post.id}&_method=PUT`, null)
         .comment-reply-form
           +comment-form(null, `/comments?postId=${post.id}`, comment.id)
+    .comment-end
     if comment.childComments
       for childComment in comment.childComments
         +comment(user, post, childComment)

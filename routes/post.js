@@ -186,6 +186,7 @@ router.get('/:postId', async (req, res, next) => {
     const nextId = await Post.min('id', {
       where: {
         user_id: post.UserId,
+        published_at: { [Op.ne]: null },
         id: {
           [Op.gt]: post.id
         }
@@ -194,6 +195,7 @@ router.get('/:postId', async (req, res, next) => {
     const prevId = await Post.max('id', {
       where: {
         user_id: post.UserId,
+        published_at: { [Op.ne]: null },
         id: {
           [Op.lt]: post.id
         }

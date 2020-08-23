@@ -41,11 +41,24 @@ block content
           i.material-icons favorite
     .top-btn
       a(href='#') TOP
-    .pagination
-      if prev
-        button.prev-post(onclick=`location.href="/post/${prev.id}"`)= prev.title.substring(0, 25)
-      if next
-        button.next-post(onclick=`location.href="/post/${next.id}"`)= next.title.substring(0, 25)
+    if prev || next
+      h3.pagination 글쓴이의 다른 글
+      .pagination-body
+        if prev
+          button.prev-post(onclick=`location.href="/post/${prev.id}"`)
+            .pagination-arrow
+              .material-icons arrow_back
+            .pagination-info
+              .pagination-title 이전글
+              .pagination-content= prev.title.length > 25 ? prev.title.substring(0, 25) + '...' : prev.title
+        if next
+          button.next-post(onclick=`location.href="/post/${next.id}"`)
+            .pagination-info
+              .pagination-title 다음글
+              .pagination-content= next.title.length > 25 ? next.title.substring(0, 25) + '...' : next.title
+            //- .pagination-content= '아무말이나 그냥 적어봅니다. 태스트입니다. 어떻게 될까요'.length > 20 ? 'd아무말이나 그냥 적어봅니다. 태스트입니다. 어떻게 될까요'.substring(0, 20) + '...' : next.title
+            .pagination-arrow
+              .material-icons arrow_forward
     .comments
       //- -const length = commentsLength? commentLength : 0
       h4= `${commentLength || 0}개의 댓글`
