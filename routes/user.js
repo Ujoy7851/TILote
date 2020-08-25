@@ -58,9 +58,6 @@ router.get('/private', isLoggedIn, async (req, res, next) => {
 
 router.get('/:username', async (req, res, next) => {
   try {
-    if(req.query.tag) {
-      
-    }
     const user = await User.findOne({
       where: { 
         username: req.params.username
@@ -79,6 +76,7 @@ router.get('/:username', async (req, res, next) => {
         },
         order: [['published_at', 'DESC']]
       });
+      let postLength = posts.length;
       let tags = await Promise.all(
         posts.map(async post => {
           let tagsTemp = await post.getTags();
@@ -113,7 +111,8 @@ router.get('/:username', async (req, res, next) => {
         user: req.user,
         posts,
         tags,
-        tag: req.query.tag
+        tag: req.query.tag,
+        postLength
       });
     }
   } catch(error) {

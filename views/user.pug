@@ -31,7 +31,7 @@ block content
         .tags Tags
         button.tag(onclick=`location.href='/user/${owner.username}'`)
           if tag
-            span.tag-name= 'All ' + `${posts.length}`
+            span.tag-name= 'All ' + `${postLength}`
           else
             span.tag-name.tag-selected= 'All ' + `${posts.length}`
         for t in Object.keys(tags)
