@@ -9,7 +9,6 @@ block link
 
 block content
   section.main-editor(data-post=post data-tags=tags)
-    //- form.post-form(action='/post' method='post')
     .editor-title
       textarea#edit-title(placeholder='제목')
     .editor-tag
@@ -24,7 +23,6 @@ block content
     .private
       input#is-private(type='checkbox' name='private')
       | 나만 보이는 글
-    //- form#thumbnail-form(action='/post/img' method='post' enctype='multipart/form-data')
     hr
     .thumbnail-preview
       div 미리보기 이미지
@@ -97,7 +95,6 @@ block content
       }
     };
     document.getElementById('edit-description').onkeyup = function() {
-      //- var content = this.value;
       if(this.value.length > 100) {
         document.querySelector('.description-count').innerHTML = '최대 100자까지 입력 가능합니다.';
         this.value = this.value.substring(0, 100);
@@ -120,7 +117,6 @@ block content
       xhr.onload = function() {
         if(xhr.status === 200) {
           postTemp = JSON.parse(xhr.responseText);
-          //- console.log(postTemp);
           alert('임시저장 되었습니다.');
         }
         if(xhr.status === 403) {
@@ -157,7 +153,6 @@ block content
     });
     document.getElementById('img').addEventListener('change', function (e) {
       var formData = new FormData();
-      //- console.log(this, this.files);
       formData.append('img', this.files[0]);
       var xhr = new XMLHttpRequest();
       xhr.onload = function () {

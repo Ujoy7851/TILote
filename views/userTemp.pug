@@ -29,21 +29,13 @@ block content
       for post in posts
         .post-card
           button.post(onclick=`location.href='/post?id=${post.id}'`)
-            //- input#post-author-id(type='hidden' value=post.User.username)
-            //- input#post-id(type='hidden' value=post.id)
             .post-left
               .post-top
                 .post-title= post.title.length > 25 ? post.title.substring(0, 25) + '...' : post.title
-                //- if post.description
-                //-   -const content = post.description.length > 70 ? post.description.substring(0, 70) + '...' : post.description
-                //-   .post-content= content
               .post-bottom
                 .post-info
                   .post-detail-info
                     .post-updated= post.updatedAt.toString().substring(4, 21)
-            //- if post.thumbnail
-            //-   .post-right
-            //-     image#post-thumbnail(src=`${post.thumbnail}` alt='thumbnail')
           if user && user.id === owner.id
             .manage-buttons
               button.delete.btn(data-post-id=post.id) 삭제
@@ -64,49 +56,3 @@ block content
         }
       });
     });
-  //-     if(!this.classList.contains('selected')) {
-  //-       this.classList.add('selected');
-  //-       document.getElementById('like-order').classList.remove('selected');
-  //-       var xhr = new XMLHttpRequest();
-  //-       xhr.onload = function() {
-  //-         if (xhr.status === 200 || xhr.status === 201) {
-  //-           console.log(xhr.responseText);
-  //-         } else {
-  //-           console.error(xhr.responseText);
-  //-         }
-  //-       };
-  //-       xhr.open('GET', '/');
-  //-       xhr.send();
-  //-     }
-  //-   });
-  //-   document.getElementById('like-order').addEventListener('click', function() {
-  //-     if(!this.classList.contains('selected')) {
-  //-       this.classList.add('selected');
-  //-       document.getElementById('new-order').classList.remove('selected');
-  //-       var xhr = new XMLHttpRequest();
-  //-       xhr.onload = function() {
-  //-         if (xhr.status === 200 || xhr.status === 201) {
-  //-           //- console.log(xhr.responseText);
-            
-  //-         } else {
-  //-           console.error(xhr.responseText);
-  //-         }
-  //-       };
-  //-       xhr.open('GET', '/like');
-  //-       xhr.send();
-  //-     }
-  //-   })
-  //-   document.querySelectorAll('.post').forEach(function(post) {
-  //-     post.addEventListener('click', function() {
-  //-       var postAuthorId = post.querySelector('#post-author-id').value;
-  //-       var postId = post.querySelector('#post-id').value;
-  //-       var xhr = new XMLHttpRequest();
-  //-       xhr.onload = function() {
-  //-         if(xhr.status === 200) {
-  //-           console.error(xhr.responseText);
-  //-         } else {
-  //-           console.error(xhr.responseText);
-  //-         }
-  //-       }
-  //-     })
-  //-   });

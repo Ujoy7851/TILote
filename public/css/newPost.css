@@ -1,14 +1,11 @@
 .main-editor {
   height: 100%;
   width: 70%;
-  /* padding: 2rem; */
 }
 
 .post-detail {
-  /* height: 100%; */
   width: 25%;
   margin-left: 1rem;
-  /* background-color: #dddddd; */
   border-radius: 1rem;
   padding: 1rem;
   box-shadow: 0 0 0.7rem 0 rgba(0, 0, 0, 0.1);
@@ -17,9 +14,7 @@
 .half {
   display: inline-block;
   width: 50%;
-  /* margin: 1rem 0; */
   padding: 1rem 0.5rem;
-  /* vertical-align: top; */
 }
 
 .CodeMirror {
@@ -36,8 +31,6 @@
 
 .private, .thumbnail-preview {
   margin-bottom: 0.5rem;
-  
-  /* background-color: #bbbbbb; */
 }
 
 #edit-title {
@@ -88,8 +81,6 @@
 #img-preview {
   width: 100%;
   margin: 0.3rem 0;
-  /* height: 10rem; */
-  /* background:url('https://www.worldloppet.com/wp-content/uploads/2018/10/no-img-placeholder.png'); */
 }
 
 .preview-buttons {
@@ -105,13 +96,8 @@
   color: 303337;
   cursor: pointer;
   border-radius: 0.5rem;
-  /* border: 1px solid #303337; */
   border: none;
-  /* border-color: #303337; */
-  /* border-width: thin; */
   background: white;
-  /* margin-left: 0.1rem;
-  margin-right: 0.1rem; */
   margin: 0 0.5rem;
 }
 

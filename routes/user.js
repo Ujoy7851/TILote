@@ -127,7 +127,6 @@ router.get('/:username/likes', async (req, res, next) => {
     const user = await User.findOne({
       where: { username: req.params.username }
     });
-    // let posts = [];
     if(user) {
       let posts = await user.getLiked({
         where: {

@@ -1,11 +1,9 @@
 .main-container {
-  /* height: 100%; */
   padding: 0 2rem;
 }
 
 nav {
   margin: 0 0 2rem 0;
-  /* padding: 0 2rem; */
   text-align: center;
 }
 
@@ -33,10 +31,8 @@ nav {
 }
 
 .post-detail {
-  /* height: 100%; */
   width: 25%;
   margin-left: 1rem;
-  /* background-color: #dddddd; */
   border-radius: 1rem;
   padding: 1rem;
   box-shadow: 0 0 0.7rem 0 rgba(0, 0, 0, 0.1);
@@ -44,12 +40,6 @@ nav {
   font-size: 1.2rem;
   font-weight: bold;
 }
-
-/* .post-detail {
-  color: #303337;
-  font-size: 1.2rem;
-  font-weight: bold;
-} */
 
 .selected {
   color: #303337;
@@ -62,7 +52,6 @@ nav {
   display: flex;
   flex-wrap: wrap;
   height: 100%;
-  /* justify-content: space-around; */
   padding: 0;
 }
 
@@ -72,7 +61,6 @@ nav {
 }
 
 .post {
-  /* margin: 0.5rem; */
   padding: 0;
   display: flex;
   flex-direction: row;
@@ -83,14 +71,10 @@ nav {
   border: 0;
   border-radius: 1rem;
   box-shadow: 0 0 0.7rem 0 rgba(0, 0, 0, 0.1);
-  /* border: thin solid #dddddd; */
-  /* border-width: thin; */
   text-align: center;
 }
 
 .post-right {
-  /* margin-left: 1rem; */
-  /* min-width: 8rem; */
   width: 40%;
   height: 100%;
   background-color: #dddddd;
@@ -104,12 +88,6 @@ nav {
   height: 100%;
   object-fit: cover;
 }
-
-/* @media screen and (max-width: 60rem) {
-  .post-right {
-    display: none;
-  }
-} */
 
 .post:hover {
   box-shadow: 0.2rem 0.2rem 0.7rem 0 rgba(0, 0, 0, 0.3);
@@ -156,13 +134,11 @@ nav {
   }
 
   .post-card {
-    /* height: 14rem; */
     padding: 0;
     border-bottom: 0.1rem solid #dddddd;
   }
 
   .post {
-    /* height: 13rem; */
     box-shadow: none;
   }
 
@@ -174,16 +150,6 @@ nav {
     display: none;
   }
 }
-
-/* @media screen and (max-width: 25rem) {
-  .post-card {
-    height: 15rem;
-  }
-
-  .post {
-    height: 14rem;
-  }
-} */
 
 .post-top, .post-bottom {
   text-align: left;
@@ -200,7 +166,6 @@ nav {
 .post-content {
   color: #727272;
   font-size: 0.8rem;
-  /* font-weight: bold; */
 }
 
 .post-info {
@@ -245,7 +210,6 @@ nav {
   justify-content: space-between;
   font-size: 0.75rem;
   color: #aaaaaa;
-  /* font-weight: bold; */
 }
 
 .post-author-name {

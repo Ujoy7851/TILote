@@ -18,8 +18,6 @@ router.post('/', isLoggedIn, async (req, res, next) => {
         parent_comment: req.body.parentComment
       });
     }
-    // console.log(post);
-    // res.send('OK');
     res.redirect(`/post/${post.id}`);
   } catch(error) {
     logger.error(error);
@@ -34,7 +32,6 @@ router.put('/:commentId', isLoggedIn, async (req, res, next) => {
     }, {
       where: { id: req.params.commentId }
     });
-    // console.log('=================', req.query.postId);
     res.redirect(`/post/${req.query.postId}`);
   } catch(error) {
     logger.error(error);

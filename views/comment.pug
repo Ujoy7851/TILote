@@ -2,13 +2,6 @@ include commentForm
 
 mixin comment(user, post, comment)
   .comment(id=`comment-${comment.id}` class=`${comment.parent_comment ? 'child-comment' : ''}`)
-    //- .comment-show
-    //-   .comment-author= comment.User.username
-    //-   .comment-content= comment.content
-    //-   .comment-info= comment.createdAt
-    //- if comment.is_deleted
-    //-   .deleted= '삭제된 댓글 입니다.'
-    //- else
     .comment-info
       .comment-author-image
         if comment.User.thumbnail
@@ -39,10 +32,3 @@ mixin comment(user, post, comment)
     if comment.childComments
       for childComment in comment.childComments
         +comment(user, post, childComment)
-    //- if user
-    //-   //- form.comment-reply#comment-form(action=`/comments?postId=${post.id}` method='post')
-    //-   //-   textarea#comment-content(name='content' placeholder='댓글을 입력하세요.')
-    //-   //-   button.write(type='button') 댓글 쓰기
-    //-   //-   span.comment-error
-    //-   .comment-reply-form
-    //-     +comment-form(null, `/comments?postId=${post.id}`, comment.id)

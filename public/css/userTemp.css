@@ -1,9 +1,5 @@
 .main-container {
-  /* height: 100%; */
   padding: 0 2rem;
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
   width: 100%;
   max-width: 50rem;
 }
@@ -12,13 +8,6 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* position: absolute;
-  left: 2rem;
-  top: 5rem;
-  width: 10rem; */
-  /* text-align: center; */
-  /* width: 100%; */
-  /* max-width: 45rem; */
   background-color: #c166fd18;
   border-radius: 1rem;
   margin: 0 1rem;
@@ -42,16 +31,12 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* margin: 1rem 1rem; */
 }
 
 #profile-icon {
   color: white;
   background-color: #c166fd34;
   font-size: 5rem;
-  /* border-radius: 50%; */
-  /* padding: 0.1rem; */
-  /* margin: 1rem 1rem; */
 }
 
 .setting-btn {
@@ -62,8 +47,6 @@
 #setting-icon {
   color: #c166fd;
   font-size: 1rem;
-  /* border-radius: 50%; */
-  /* padding: 0.1rem; */
   margin: 1rem 1rem;
 }
 
@@ -76,22 +59,15 @@
   font-weight: bold;
   color: #c166fd;
   margin-bottom: 0.5rem;
-  /* border-left: 0.2rem solid #727272;
-  border-right: 0.2rem solid #727272; */
-  
-  /* width: 100%; */
-  /* max-width: 45rem; */
 }
 
 .profile-about {
   font-size: 0.8rem;
   margin-top: 0.5rem;
-  /* font-weight: bold; */
 }
 
 nav {
   margin: 1rem 0 1rem 0;
-  /* padding: 0 2rem; */
   text-align: center;
 }
 
@@ -104,7 +80,6 @@ nav {
   font-size: 1rem;
   height: 2rem;
   background-color: white;
-  /* width: 5rem; */
   border-style: solid;
 }
 
@@ -112,12 +87,6 @@ nav {
   color: #303337;
   border-color: #c166fd;
 }
-
-/* .post-detail {
-  color: #303337;
-  font-size: 1.2rem;
-  font-weight: bold;
-} */
 
 .btn-selected {
   color: #303337;
@@ -132,7 +101,6 @@ nav {
 }
 
 .post-card {
-  /* flex: 0 0 50rem; */
   width: 45rem;
   padding: 0.5rem;
   display: flex;
@@ -140,19 +108,13 @@ nav {
 }
 
 .post {
-  /* margin: 0.5rem; */
   padding: 0;
-  /* display: flex;
-  flex-direction: row;
-  justify-content: space-between; */
   height: 7rem;
   width: 90%;
   background-color: white;
   border: 0;
   border-radius: 1rem;
   box-shadow: 0 0 0.7rem 0 rgba(0, 0, 0, 0.1);
-  /* border: thin solid #dddddd; */
-  /* border-width: thin; */
   text-align: center;
 }
 
@@ -188,13 +150,11 @@ nav {
   }
 
   .post-card {
-    /* height: 14rem; */
     padding: 0;
     border-bottom: 0.1rem solid #dddddd;
   }
 
   .post {
-    /* height: 13rem; */
     box-shadow: none;
     width: 70%;
   }
@@ -221,15 +181,9 @@ nav {
 }
 
 .post-detail-info {
-  /* margin: 0 0.5rem;
-  padding: 0; */
-  /* display: flex;
-  flex-direction: column;
-  justify-content: space-between; */
   font-size: 0.75rem;
   color: #bbbbbb;
   text-align: left;
-  /* font-weight: bold; */
 }
 
 .nav-btn, .post, delete:focus {

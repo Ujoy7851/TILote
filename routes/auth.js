@@ -20,7 +20,6 @@ router.post('/join', async (req, res, next) => {
         username,
         password: hash
       });
-      // return res.redirect('/');
       passport.authenticate('local', (authError, user, info) => {
         if(authError) {
           logger.error(error);

@@ -16,18 +16,11 @@
   border: 0;
   border-radius: 1rem;
   box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
-  /* text-align: center; */
-  /* padding: 2rem; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-/* @media screen and (max-width: 25rem) {
-  .login-card {
-    width: auto;
-  }
-} */
 
 .login-title {
   font-weight: 300;

@@ -77,7 +77,6 @@ router.post('/', isLoggedIn, async (req, res, next) => {
       }, {
         where: { id: req.body.id }
       });
-      // console.log('update post:', post)
     } else {
       post = await Post.create({
         title: req.body.title,
@@ -98,9 +97,7 @@ router.post('/', isLoggedIn, async (req, res, next) => {
       }));
       await post.setTags(result.map(r => r[0]));
     }
-    // console.log('user_id:', req.user.id);
     res.status(201).send({ username: req.user.username });
-    // res.redirect('/')
   } catch(error) {
     logger.error(error);
     next(error);
@@ -133,7 +130,6 @@ router.post('/temp', isLoggedIn, async (req, res, next) => {
       }, {
         where: { id: req.body.id }
       });
-      // console.log('update post:', post)
     } else {
       post = await Post.create({
         title: req.body.title,
@@ -146,7 +142,6 @@ router.post('/temp', isLoggedIn, async (req, res, next) => {
       });
     }
     const tags = req.body.tag.match(/#[^\s#]*/g);
-    // console.log('tags:', tags);
     if(tags) {
       const result = await Promise.all(tags.map(tag => {
         return Tag.findOrCreate({
@@ -155,7 +150,6 @@ router.post('/temp', isLoggedIn, async (req, res, next) => {
       }));
       await post.setTags(result.map(r => r[0]));
     }
-    // console.log(req.body);
     res.json(post.id);
   } catch(error) {
     logger.error(error);
@@ -164,7 +158,6 @@ router.post('/temp', isLoggedIn, async (req, res, next) => {
 });
 
 router.post('/img', isLoggedIn, upload.single('img'), (req, res) => {
-  // console.log(req.file);
   res.json({ url: `/img/${req.file.filename}` });
 });
 

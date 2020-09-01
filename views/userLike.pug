@@ -29,8 +29,6 @@ block content
       for post in posts
         .post-card
           button.post(onclick=`location.href='/post/${post.id}'`)
-            //- input#post-author-id(type='hidden' value=post.User.username)
-            //- input#post-id(type='hidden' value=post.id)
             .post-left
               .post-top
                 .post-title= post.title.length > 25 ? post.title.substring(0, 25) + '...' : post.title
@@ -53,51 +51,3 @@ block content
             if post.thumbnail
               .post-right
                 image#post-thumbnail(src=`${post.thumbnail}` alt='thumbnail')
-  //- script.
-  //-   document.getElementById('new-order').addEventListener('click', function() {
-  //-     if(!this.classList.contains('selected')) {
-  //-       this.classList.add('selected');
-  //-       document.getElementById('like-order').classList.remove('selected');
-  //-       var xhr = new XMLHttpRequest();
-  //-       xhr.onload = function() {
-  //-         if (xhr.status === 200 || xhr.status === 201) {
-  //-           console.log(xhr.responseText);
-  //-         } else {
-  //-           console.error(xhr.responseText);
-  //-         }
-  //-       };
-  //-       xhr.open('GET', '/');
-  //-       xhr.send();
-  //-     }
-  //-   });
-  //-   document.getElementById('like-order').addEventListener('click', function() {
-  //-     if(!this.classList.contains('selected')) {
-  //-       this.classList.add('selected');
-  //-       document.getElementById('new-order').classList.remove('selected');
-  //-       var xhr = new XMLHttpRequest();
-  //-       xhr.onload = function() {
-  //-         if (xhr.status === 200 || xhr.status === 201) {
-  //-           //- console.log(xhr.responseText);
-            
-  //-         } else {
-  //-           console.error(xhr.responseText);
-  //-         }
-  //-       };
-  //-       xhr.open('GET', '/like');
-  //-       xhr.send();
-  //-     }
-  //-   })
-  //-   document.querySelectorAll('.post').forEach(function(post) {
-  //-     post.addEventListener('click', function() {
-  //-       var postAuthorId = post.querySelector('#post-author-id').value;
-  //-       var postId = post.querySelector('#post-id').value;
-  //-       var xhr = new XMLHttpRequest();
-  //-       xhr.onload = function() {
-  //-         if(xhr.status === 200) {
-  //-           console.error(xhr.responseText);
-  //-         } else {
-  //-           console.error(xhr.responseText);
-  //-         }
-  //-       }
-  //-     })
-  //-   });

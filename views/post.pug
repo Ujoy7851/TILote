@@ -4,7 +4,6 @@ include comment
 include commentForm
 
 block link
-  //- link(rel='stylesheet' href='https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css')
   link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/a11y-light.min.css")
   script(src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js")
   script hljs.initHighlightingOnLoad()
@@ -56,19 +55,13 @@ block content
             .pagination-info
               .pagination-title 다음글
               .pagination-content= next.title.length > 25 ? next.title.substring(0, 25) + '...' : next.title
-            //- .pagination-content= '아무말이나 그냥 적어봅니다. 태스트입니다. 어떻게 될까요'.length > 20 ? 'd아무말이나 그냥 적어봅니다. 태스트입니다. 어떻게 될까요'.substring(0, 20) + '...' : next.title
             .pagination-arrow
               .material-icons arrow_forward
     .comments
-      //- -const length = commentsLength? commentLength : 0
       h4= `${commentLength || 0}개의 댓글`
       for comment in commentsTree
         +comment(user, post, comment)
     if user
-      //- form#comment-form(action=`/comments?postId=${post.id}` method='post')
-      //-   textarea#comment-content(name='content' placeholder='댓글을 입력하세요.')
-      //-   button.write(type='button') 댓글 쓰기
-      //-   span.comment-error
       +comment-form(null, `/comments?postId=${post.id}`, null)
   script.
     var likeBtn = document.querySelector('.like');
@@ -107,15 +100,6 @@ block content
         xhr.send();
       });
     }
-    //- document.querySelector('.write').addEventListener('click', function() {
-    //-   var content = document.getElementById('comment-content').value;
-    //-   if(!content) {
-    //-     this.parentNode.querySelector('.comment-error').innerHTML = '댓글을 입력하세요.'
-    //-   } else {
-    //-     //- document.getElementById('comment-form').submit();
-    //-     this.parentElement.submit();
-    //-   }
-    //- });
     document.querySelectorAll('.reply').forEach(function(replyButton) {
       replyButton.addEventListener('click', function() {
         var commentId = this.dataset.id;
@@ -128,9 +112,6 @@ block content
           editEnabled.classList.remove('comment-edit-enabled');
         }
         document.getElementById(`comment-${commentId}`).classList.add('comment-reply-enabled');
-        //- console.log(document.querySelector('.comment-reply-enabled').childNodes);
-        //- this.parentNode.parentNode.lastChild.classList.add('comment-reply-enabled');
-        //- console.log(this.parentNode.parentNode.lastChild);
       });
     });
     document.querySelectorAll('.edit').forEach(function(editButton) {
@@ -146,7 +127,6 @@ block content
           editEnabled.classList.remove('comment-edit-enabled');
         }
         document.getElementById(`comment-${commentId}`).classList.add('comment-edit-enabled');
-        //- this.parentNode.parentNode.lastChild.classList.add('comment-edit-enabled');
       });
     });
     document.querySelectorAll('.delete').forEach(function(deleteButton) {

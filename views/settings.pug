@@ -52,7 +52,6 @@ block content
     });
     document.getElementById('img').addEventListener('change', function (e) {
       var formData = new FormData();
-      //- console.log(this, this.files);
       formData.append('img', this.files[0]);
       var xhr = new XMLHttpRequest();
       xhr.onload = function () {

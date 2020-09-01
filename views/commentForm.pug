@@ -2,10 +2,7 @@ mixin comment-form(comment, actionUrl, parentComment)
   form.comment-form(action=actionUrl method='post')
     if parentComment
       input(type='hidden' name='parentComment' value=parentComment)
-    //- if comment
     textarea.comment-form-content(name='content' placeholder='댓글을 입력하세요.') #{comment ? comment.content : ''}
-    //- else
-    //-   textarea.comment-content(name='content' placeholder='댓글을 입력하세요.')
     if comment
       button.submit.form-edit(type='button') 수정
       button.form-edit-cancel(type='button' data-id=comment.id) 취소
