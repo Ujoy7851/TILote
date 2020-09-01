@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { User, Post, Comment } = require('../models');
 const { isLoggedIn } = require('./middlewares');
+const logger = require('../config/logger');
 
 router.post('/', isLoggedIn, async (req, res, next) => {
   try {
@@ -21,7 +22,7 @@ router.post('/', isLoggedIn, async (req, res, next) => {
     // res.send('OK');
     res.redirect(`/post/${post.id}`);
   } catch(error) {
-    console.error(error);
+    logger.error(error);
     next(error);
   }
 });
@@ -36,7 +37,7 @@ router.put('/:commentId', isLoggedIn, async (req, res, next) => {
     // console.log('=================', req.query.postId);
     res.redirect(`/post/${req.query.postId}`);
   } catch(error) {
-    console.error(error);
+    logger.error(error);
     next(error);
   }
 });
@@ -51,7 +52,7 @@ router.delete('/:commentId', isLoggedIn, async (req, res, next) => {
   
     res.redirect(`/post/${req.query.postId}`);
   } catch(error) {
-    console.error(error);
+    logger.error(error);
     next(error);
   }
 });

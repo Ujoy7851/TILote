@@ -8,8 +8,9 @@ const passport = require('passport');
 const redis = require('redis');
 const RedisStore = require('connect-redis')(session);
 const methodOverride = require('method-override');
-// const helmet = require('helmet');
-// const hpp = require('hpp');
+const logger = require('./config/logger');
+const helmet = require('helmet');
+const hpp = require('hpp');
 require('dotenv').config();
 
 const indexRouter = require('./routes');
@@ -54,14 +55,14 @@ const sessionOption = {
   secret: process.env.COOKIE_SECRET,
   cookie: {
       httpOnly: true,
-      secure: false
+      secure: true
   },
   store: new RedisStore({ client })
 };
 
 if(process.env.NODE_ENV === 'production') {
   sessionOption.proxy = true;
-  // sessionOption.cookie.secure = true;  //https
+  sessionOption.cookie.secure = true;  //https
 }
 
 app.use(session(sessionOption));
@@ -79,6 +80,7 @@ app.use('/comments', commentRouter);
 app.use((req, res, next) => {
     const err = new Error('Not Found');
     err.status = 404;
+    logger.errror(err);
     next(err);
 });
 
@@ -90,5 +92,5 @@ app.use((err, res, req) => {
 });
 
 app.listen(app.get('port'), () => {
-    console.log(`${app.get('port')}번 포트에서 서버 실행중...`);
+    logger.info(`${app.get('port')}번 포트에서 서버 실행중...`);
 });

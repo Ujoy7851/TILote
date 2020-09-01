@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 
 const { User } = require('../models');
+const logger = require('../config/logger');
 
 router.post('/join', async (req, res, next) => {
   const { email, username, password } = req.body;
@@ -22,7 +23,7 @@ router.post('/join', async (req, res, next) => {
       // return res.redirect('/');
       passport.authenticate('local', (authError, user, info) => {
         if(authError) {
-          console.log(error);
+          logger.error(error);
           next(error);
         }
         if(!user) {
@@ -31,7 +32,7 @@ router.post('/join', async (req, res, next) => {
         }
         req.login(user, (loginError) => {
           if(loginError) {
-            console.error(loginError);
+            logger.error(loginError);
             next(loginError);
           }
           res.redirect('/');
@@ -39,7 +40,7 @@ router.post('/join', async (req, res, next) => {
       })(req, res, next);
     }
   } catch(error) {
-    console.error(error);
+    logger.error(error);
     next(error);
   }
 });
@@ -48,7 +49,7 @@ router.post('/login', async (req, res, next) => {
   try {
     passport.authenticate('local', (authError, user, info) => {
       if(authError) {
-        console.log(error);
+        logger.info(error);
         next(error);
       }
       if(!user) {
@@ -57,14 +58,14 @@ router.post('/login', async (req, res, next) => {
       }
       req.login(user, (loginError) => {
         if(loginError) {
-          console.error(loginError);
+          logger.error(loginError);
           next(loginError);
         }
         res.redirect('/');
       })
     })(req, res, next);
   } catch(error) {
-    console.error(error);
+    logger.error(error);
     next(error);
   }
 });

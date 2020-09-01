@@ -3,17 +3,18 @@ const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
 const marked = require('marked');
-const hljs = require('highlight.js');
 const removeMd = require('remove-markdown');
 const { Op } = require("sequelize");
 const { isLoggedIn } = require('./middlewares');
 const { Post, User, Tag, sequelize, Comment } = require('../models');
 const { convertToTrees } = require('../public/js/util');
+const logger = require('../config/logger');
 const router = express.Router();
+
 
 fs.readdir('uploads', (error) => {
   if (error) {
-    console.error('uploads 폴더가 없어 uploads 폴더를 생성합니다.');
+    logger.error('uploads 폴더가 없어 uploads 폴더를 생성합니다.');
     fs.mkdirSync('uploads');
   }
 });
@@ -101,7 +102,7 @@ router.post('/', isLoggedIn, async (req, res, next) => {
     res.status(201).send({ username: req.user.username });
     // res.redirect('/')
   } catch(error) {
-    console.error(error);
+    logger.error(error);
     next(error);
   }
 });
@@ -154,16 +155,16 @@ router.post('/temp', isLoggedIn, async (req, res, next) => {
       }));
       await post.setTags(result.map(r => r[0]));
     }
-    console.log(req.body);
+    // console.log(req.body);
     res.json(post.id);
   } catch(error) {
-    console.error(error);
+    logger.error(error);
     next(error);
   }
 });
 
 router.post('/img', isLoggedIn, upload.single('img'), (req, res) => {
-  console.log(req.file);
+  // console.log(req.file);
   res.json({ url: `/img/${req.file.filename}` });
 });
 
@@ -248,7 +249,7 @@ router.get('/:postId', async (req, res, next) => {
       });
     }
   } catch(error) {
-    console.error(error);
+    logger.error(error);
     next(error);
   }
 });
@@ -266,7 +267,7 @@ router.post('/:postId/like', isLoggedIn, async (req, res, next) => {
     await post.addLiker(req.user.id);
     res.status(200).send();
   } catch(error) {
-    console.error(error);
+    logger.error(error);
     next(error);
   }
 });
@@ -284,7 +285,7 @@ router.post('/:postId/unlike', isLoggedIn, async (req, res, next) => {
     await post.removeLiker(req.user.id);
     res.status(200).send();
   } catch(error) {
-    console.error(error);
+    logger.error(error);
     next(error);
   }
 });
@@ -298,7 +299,7 @@ router.delete('/:postId', async (req, res, next) => {
     });
     res.send('OK');
   } catch(error) {
-    console.error(error);
+    logger.error(error);
     next(error);
   }
 })

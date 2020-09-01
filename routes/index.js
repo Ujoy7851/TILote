@@ -3,6 +3,7 @@ const { Op } = require("sequelize");
 const router = express.Router();
 const { User, Post } = require('../models');
 const { isLoggedIn } = require('./middlewares');
+const logger = require('../config/logger');
 
 router.get('/', async (req, res, next) => {
   try {    
@@ -22,7 +23,7 @@ router.get('/', async (req, res, next) => {
       user: req.user
     });
   } catch(error) {
-    console.error(error);
+    logger.error(error);
     next(error);
   }
 });
@@ -45,7 +46,7 @@ router.get('/likes', async (req, res, next) => {
       user: req.user
     });
   } catch(error) {
-    console.error(error);
+    logger.error(error);
     next(error);
   }
 })
@@ -80,7 +81,7 @@ router.post('/settings', isLoggedIn, async (req, res, next) => {
     });
     res.status(201).send({ username: req.user.username });
   } catch(error) {
-    console.error(error);
+    logger.error(error);
     next(error);
   }
 });
