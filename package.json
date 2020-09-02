@@ -4,7 +4,7 @@
   "description": "Blog service for TIL",
   "main": "app.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production PORT=80 pm2 start app.js -i 0",
+    "start": "cross-env NODE_ENV=production pm2 start app.js -i 0",
     "dev": "nodemon app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
