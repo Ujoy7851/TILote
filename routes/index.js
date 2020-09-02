@@ -18,6 +18,7 @@ router.get('/', async (req, res, next) => {
       },
       order: [['published_at', 'DESC']]
     });
+    res.set('Content-Security-Policy', 'unsafe-inline');
     res.render('main', {
       posts,
       user: req.user
@@ -41,6 +42,7 @@ router.get('/likes', async (req, res, next) => {
       },
       order: [['likes', 'DESC'], ['published_at', 'DESC']]
     });
+    res.set('Content-Security-Policy', 'unsafe-inline');
     res.render('like', {
       posts,
       user: req.user

@@ -158,7 +158,7 @@ router.post('/temp', isLoggedIn, async (req, res, next) => {
 });
 
 router.post('/img', isLoggedIn, upload.single('img'), (req, res) => {
-  res.json({ url: `/img/${req.file.filename}` });
+  res.json({ url: `/img/${req.file.filename }` });
 });
 
 router.get('/:postId', async (req, res, next) => {
@@ -230,6 +230,7 @@ router.get('/:postId', async (req, res, next) => {
         langPrefix: ''
       });
       const content = marked(post.content);
+      res.set('Content-Security-Policy', 'unsafe-inline');
       res.render('post', {
         post,
         user: req.user,
