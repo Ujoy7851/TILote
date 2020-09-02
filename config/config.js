@@ -17,16 +17,12 @@ module.exports = {
     "dialect": "mysql"
   },
   "production": {
-    "username": "admin",
+    "username": "root",
     "password": process.env.SEQUELIZE_PASSWORD,
     "database": "tilote",
-    "host": process.env.DB_HOST,
-    "port": process.env.DB_PORT,
+    "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": false,
-    "logging": false,
-    "maxConcurrentQueries": 100,
-    "ssl": "Amazon RDS",
-    "pool": { maxConnections: 5, maxIdleTime: 30 }
+    "logging": false
   }
 }
