@@ -230,7 +230,6 @@ router.get('/:postId', async (req, res, next) => {
         langPrefix: ''
       });
       const content = marked(post.content);
-      res.set('Content-Security-Policy', 'unsafe-inline');
       res.render('post', {
         post,
         user: req.user,

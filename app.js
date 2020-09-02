@@ -11,6 +11,7 @@ const methodOverride = require('method-override');
 const logger = require('./config/logger');
 const helmet = require('helmet');
 const hpp = require('hpp');
+const { expressCspHeader, INLINE, NONE, SELF } = require('express-csp-header');
 require('dotenv').config();
 
 const indexRouter = require('./routes');
@@ -68,6 +69,11 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
+app.use(expressCspHeader({
+  directives: {
+      'script-src-attr': ['unsafe-inline']
+  }
+}));
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);

@@ -21,6 +21,7 @@
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-csp-header": "^4.0.0",
     "express-session": "^1.17.1",
     "helmet": "^4.1.0",
     "hpp": "^0.2.3",

@@ -20,7 +20,6 @@ router.get('/temps', isLoggedIn, async (req, res, next) => {
         },
         order: [['updated_at', 'DESC']]
       });
-      res.set('Content-Security-Policy', 'unsafe-inline');
       res.render('userTemp', {
         owner: user,
         user: req.user,
@@ -46,7 +45,6 @@ router.get('/private', isLoggedIn, async (req, res, next) => {
         },
         order: [['updated_at', 'DESC']]
       });
-      res.set('Content-Security-Policy', 'unsafe-inline');
       res.render('userPrivate', {
         owner: user,
         user: req.user,
@@ -109,7 +107,6 @@ router.get('/:username', async (req, res, next) => {
           order: [['published_at', 'DESC']]
         });
       }
-      res.set('Content-Security-Policy', 'unsafe-inline');
       res.render('user', {
         owner: user,
         user: req.user,
@@ -142,7 +139,6 @@ router.get('/:username/likes', async (req, res, next) => {
         }],
         order: [['published_at', 'DESC']]
       });
-      res.set('Content-Security-Policy', 'unsafe-inline');
       res.render('userLike', {
         owner: user,
         user: req.user,
