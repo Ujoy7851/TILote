@@ -1,0 +1,65 @@
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"80번 포트에서 서버 실행중...","level":"info"}
+{"message":"80번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"80번 포트에서 서버 실행중...","level":"info"}
+{"message":"80번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"name":"SequelizeConnectionError","parent":{"code":"ER_HOST_IS_BLOCKED","errno":1129,"sqlState":"","sqlMessage":"Host '172.31.45.211' is blocked because of many connection errors; unblock with 'mysqladmin flush-hosts'"},"original":{"code":"ER_HOST_IS_BLOCKED","errno":1129,"sqlState":"","sqlMessage":"Host '172.31.45.211' is blocked because of many connection errors; unblock with 'mysqladmin flush-hosts'"},"level":"error"}
+{"name":"SequelizeConnectionError","parent":{"code":"ER_HOST_IS_BLOCKED","errno":1129,"sqlState":"","sqlMessage":"Host '172.31.45.211' is blocked because of many connection errors; unblock with 'mysqladmin flush-hosts'"},"original":{"code":"ER_HOST_IS_BLOCKED","errno":1129,"sqlState":"","sqlMessage":"Host '172.31.45.211' is blocked because of many connection errors; unblock with 'mysqladmin flush-hosts'"},"level":"error"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"name":"SequelizeConnectionError","parent":{"code":"ER_HOST_IS_BLOCKED","errno":1129,"sqlState":"","sqlMessage":"Host '172.31.45.211' is blocked because of many connection errors; unblock with 'mysqladmin flush-hosts'"},"original":{"code":"ER_HOST_IS_BLOCKED","errno":1129,"sqlState":"","sqlMessage":"Host '172.31.45.211' is blocked because of many connection errors; unblock with 'mysqladmin flush-hosts'"},"level":"error"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"name":"SequelizeConnectionError","parent":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"original":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"level":"error"}
+{"name":"SequelizeConnectionError","parent":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"original":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"level":"error"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"name":"SequelizeConnectionError","parent":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"original":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"level":"error"}
+{"name":"SequelizeConnectionError","parent":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"original":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"level":"error"}
+{"name":"SequelizeConnectionError","parent":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"original":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"level":"error"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"name":"SequelizeConnectionError","parent":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"original":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"level":"error"}
+{"name":"SequelizeConnectionError","parent":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"original":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"level":"error"}
+{"name":"SequelizeConnectionError","parent":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"original":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"level":"error"}
+{"name":"SequelizeConnectionError","parent":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"original":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"level":"error"}
+{"name":"SequelizeConnectionError","parent":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"original":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"level":"error"}
+{"name":"SequelizeConnectionError","parent":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"original":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"level":"error"}
+{"name":"SequelizeConnectionError","parent":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"original":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"level":"error"}
+{"name":"SequelizeConnectionError","parent":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"original":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"level":"error"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"name":"SequelizeConnectionError","parent":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"original":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"level":"error"}
+{"name":"SequelizeConnectionError","parent":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"original":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"level":"error"}
+{"name":"SequelizeConnectionError","parent":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"original":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"level":"error"}
+{"name":"SequelizeConnectionError","parent":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"original":{"code":"ER_ACCESS_DENIED_NO_PASSWORD_ERROR","errno":1698,"sqlState":"28000","sqlMessage":"Access denied for user 'root'@'localhost'"},"level":"error"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"status":404,"level":"error"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"status":404,"level":"error"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"status":404,"level":"error"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}
+{"message":"8080번 포트에서 서버 실행중...","level":"info"}

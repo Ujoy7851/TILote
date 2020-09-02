@@ -21,7 +21,7 @@ module.exports = (passport) => {
         done(null, false, { message: '입력을 확인하세요.' });
       }
     } catch(error) {
-      console.error(error);
+      logger.error(error);
       done(error);
     }
   }));

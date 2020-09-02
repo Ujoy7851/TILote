@@ -11,7 +11,7 @@ const methodOverride = require('method-override');
 const logger = require('./config/logger');
 const helmet = require('helmet');
 const hpp = require('hpp');
-const { expressCspHeader, INLINE, NONE, SELF } = require('express-csp-header');
+// const { expressCspHeader, INLINE, NONE, SELF } = require('express-csp-header');
 require('dotenv').config();
 
 const indexRouter = require('./routes');
@@ -33,6 +33,19 @@ app.set('port', process.env.PORT || 8080);
 if(process.env.NODE_ENV === 'production') {
   app.use(morgan('combined'));
   app.use(helmet());
+  app.use(helmet.contentSecurityPolicy({
+      directives: {
+        defaultSrc: ["'self'"],
+        baseUri: ["'self'"],
+        fontSrc: ["'self'", "https:", "data:"],
+        frameAncestors: ["'self'"],
+        imgSrc: ["'self'", "data:"],
+        objectSrc: ["'none'"],
+        scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"],
+        scriptSrcAttr: ["'unsafe-inline'"],
+        styleSrc: ["'self'", "https:", "'unsafe-inline'"],
+    },
+  }));
   app.use(hpp());
 } else { //development
   app.use(morgan('dev'));
@@ -45,6 +58,8 @@ app.use(express.urlencoded({ extended: false}));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 const client = redis.createClient({
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
   logErrors: true
 });
 
@@ -54,7 +69,7 @@ const sessionOption = {
   secret: process.env.COOKIE_SECRET,
   cookie: {
       httpOnly: true,
-      secure: true
+      secure: false
   },
   store: new RedisStore({ client })
 };
@@ -69,11 +84,11 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
-app.use(expressCspHeader({
-  directives: {
-      'script-src-attr': ['unsafe-inline']
-  }
-}));
+// app.use(expressCspHeader({
+//   directives: {
+//       'script-src-attr': ['unsafe-inline']
+//   }
+// }));
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
@@ -84,7 +99,7 @@ app.use('/comments', commentRouter);
 app.use((req, res, next) => {
     const err = new Error('Not Found');
     err.status = 404;
-    logger.errror(err);
+    logger.error(err);
     next(err);
 });
 
