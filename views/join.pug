@@ -6,7 +6,7 @@ block link
 block content
   .login-card
     .login-title Sign Up
-    form#login-form(action='/auth/join' method='post')
+    form#login-form(action='/auth/join' method='post' onsubmit='return validate();')
       .input-group
         input#email(type='email' name='email' placeholder='Email address' required autofocus)
       .input-group
@@ -16,3 +16,23 @@ block content
       button#login-button.btn(type='submit') 회원가입
       if joinError
         .error-message= joinError
+  script.
+      function validate() {
+          var loginForm = document.getElementById('login-form');
+          var email = loginForm.email.value;
+          var password = loginForm.password.value;
+          var emailRegExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+          var pwRegExp = /^[a-zA-Z0-9]{6,12}$/
+          if(!emailRegExp.test(email)) {
+              alert('이메일 형식이 옳지 않습니다.');
+              loginForm.email.value = '';
+              loginForm.email.focus();
+              return false;
+          } else if(!pwRegExp.test(password)) {
+              alert('비밀번호는 영문 대소문자와 숫자 6~12자리로 입력하세요.');
+              loginForm.password.value = '';
+              loginForm.password.focus();
+              return false;
+          }
+          return true;
+      }
