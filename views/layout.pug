@@ -10,6 +10,12 @@ html
     link(href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet')
     link(rel='stylesheet' href='/css/layout.css')
     block link
+    script(async src="https://www.googletagmanager.com/gtag/js?id=UA-177369949-1")
+    script.
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-177369949-1');
   body
     header
       .header-container
