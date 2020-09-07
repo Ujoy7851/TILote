@@ -3,6 +3,9 @@ extends layout
 include comment
 include commentForm
 
+block title
+  title= post.title
+
 block link
   link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/a11y-light.min.css")
   script(src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js")

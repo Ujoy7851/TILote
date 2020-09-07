@@ -343,3 +343,8 @@
 {"status":404,"level":"error"}
 {"status":404,"level":"error"}
 {"status":404,"level":"error"}
+{"level":"error"}
+{"code":"ERR_HTTP_HEADERS_SENT","level":"error"}
+{"status":404,"level":"error"}
+{"status":404,"level":"error"}
+{"status":404,"level":"error"}
