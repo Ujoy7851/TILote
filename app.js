@@ -41,7 +41,7 @@ if(process.env.NODE_ENV === 'production') {
         frameAncestors: ["'self'"],
         imgSrc: ["'self'", "data:"],
         objectSrc: ["'none'"],
-        scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"],
+        scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js"],
         scriptSrcAttr: ["'unsafe-inline'"],
         styleSrc: ["'self'", "https:", "'unsafe-inline'"],
     },

@@ -13,7 +13,7 @@ block content
         input#password(type='password' name='password' placeholder='Password' required)
       button#login-button.btn(type='submit') 로그인
       //- hr
-      //- button#google-login.btn(type='submit') Sign in with Google
-      //- button#kakao-login.btn(type='submit') Sign in with Kakao
+      button#kakao-login.btn(type='button' onclick='location.href="/auth/kakao"') 카카오 계정으로 로그인
+      button#google-login.btn(type='button' onclick='location.href="/auth/google"') 구글 계정으로 로그인
       if loginError
         .error-message= loginError

@@ -56,12 +56,6 @@ button:focus {
   margin-right: 0.1rem;
 }
 
-.btn:disabled {
-  background-color: #bbbbbb;
-  border-color: transparent;
-  color: white;
-}
-
 #logo{
   font-size:2rem;
   text-decoration: none;

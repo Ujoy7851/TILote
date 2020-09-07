@@ -131,3 +131,9 @@ hr {
   border-top: thin solid #bbbbbb;
   border-bottom: none;
 }
+
+.new-post-btn:disabled {
+  background-color: #bbbbbb;
+  border-color: transparent;
+  color: white;
+}
