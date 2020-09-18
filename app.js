@@ -39,7 +39,7 @@ if(process.env.NODE_ENV === 'production') {
         baseUri: ["'self'"],
         fontSrc: ["'self'", "https:", "data:"],
         frameAncestors: ["'self'"],
-        imgSrc: ["'self'", "data:", "https://www.google-analytics.com"],
+        imgSrc: ["'self'", "data:", "https:"],
         objectSrc: ["'none'"],
         scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js", "https://www.google-analytics.com", "https://www.googletagmanager.com/gtag/js"],
         connectSrc: ["'self'", "https://www.google-analytics.com"],

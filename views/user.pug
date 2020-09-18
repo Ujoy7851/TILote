@@ -49,7 +49,7 @@ block content
           button.post(onclick=`location.href='/post/${post.id}'`)
             .post-left
               .post-top
-                .post-title= post.title.length > 25 ? post.title.substring(0, 25) + '...' : post.title
+                .post-title= post.title.length > 30 ? post.title.substring(0, 30) + '...' : post.title
                 if post.description
                   -const content = post.description.length > 70 ? post.description.substring(0, 70) + '...' : post.description
                   .post-content= content

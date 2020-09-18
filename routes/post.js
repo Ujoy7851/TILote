@@ -66,17 +66,32 @@ router.post('/', isLoggedIn, async (req, res, next) => {
       description = req.body.description;
     }
     if(post) {
-      await Post.update({
-        title: req.body.title,
-        content: req.body.content,
-        is_private: req.body.is_private,
-        UserId: req.user.id,
-        thumbnail: req.body.thumbnail,
-        description,
-        published_at: sequelize.literal('CURRENT_TIMESTAMP')
-      }, {
-        where: { id: req.body.id }
-      });
+        if(post.published_at) {
+            await Post.update({
+                title: req.body.title,
+                content: req.body.content,
+                is_private: req.body.is_private,
+                UserId: req.user.id,
+                thumbnail: req.body.thumbnail,
+                description,
+                updated_at: sequelize.literal('CURRENT_TIMESTAMP')
+            }, {
+            where: { id: req.body.id }
+            });
+        } else {
+            await Post.update({
+                title: req.body.title,
+                content: req.body.content,
+                is_private: req.body.is_private,
+                UserId: req.user.id,
+                thumbnail: req.body.thumbnail,
+                description,
+                updated_at: sequelize.literal('CURRENT_TIMESTAMP'),
+                published_at: sequelize.literal('CURRENT_TIMESTAMP')
+            }, {
+            where: { id: req.body.id }
+            });
+        }
     } else {
       post = await Post.create({
         title: req.body.title,
