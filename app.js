@@ -11,7 +11,6 @@ const methodOverride = require('method-override');
 const logger = require('./config/logger');
 const helmet = require('helmet');
 const hpp = require('hpp');
-// const { expressCspHeader, INLINE, NONE, SELF } = require('express-csp-header');
 require('dotenv').config();
 
 const indexRouter = require('./routes');
